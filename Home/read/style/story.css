@@ -1,0 +1,84 @@
+body{
+    background-color:#f0f0f0;
+    transition: opacity 0.5s ease-in-out;
+}
+.navbar-search {
+    margin-right: auto;
+    margin-left: 20px;
+}
+.navbar-search input[type="search"] {
+    background-color: #f0f0f0;
+    border: none;
+}
+.container-fluid{
+    background-color: #135D66;
+    padding-bottom:17px;
+    padding-top: 10px;
+}
+.nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.nav-link{
+    background-color:transparent;
+    border:transparent;
+    border-radius:35px;
+    box-shadow:10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.nav-link:hover{
+    background-color:#E3FEF7;
+    border:transparent;
+    border-radius:35px;
+    box-shadow:5px;
+}
+#search{
+    border:transparent;
+    background-color:#77b0aa;
+    width:72px;height:62px;
+    border-radius:50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#search:hover{
+    border:transparent;
+    background-color:#E3FEF7;
+    width:72px;height:62px;
+    border-radius:50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.title{
+    
+    background-color: #77b0aa;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.description{
+    background-color:#E3FEF7;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family:Arial, Helvetica, sans-serif;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 60px;
+    padding-bottom: 0.5px;
+    padding-top: 0.5px;
+    text-align: left;
+    border: 2px solid #000;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.indented {
+    text-indent: 100px;
+}

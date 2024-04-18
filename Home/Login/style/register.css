@@ -1,0 +1,170 @@
+body{
+	transition: opacity 0.5s ease-in-out;
+}
+.e5_2 { 
+	background-color:rgba(255, 255, 255, 1);
+	width:1280px;
+	height:720px;
+	position:absolute;
+}
+.e5_3 { 
+	transform: rotate(-0.14449764451542116deg);
+	background-color:rgba(88.00000235438347, 163.00000548362732, 153.00000607967377, 1);
+	width:640px;
+	height:810px;
+	position:absolute;
+	left:0px;
+	top:1.193450927734375px;
+	border-top-left-radius:40px;
+	border-top-right-radius:40px;
+	border-bottom-left-radius:40px;
+	border-bottom-right-radius:40px;
+}
+.e13_18 { 
+	color:rgba(255, 255, 255, 1);
+	width:52px;
+	height:32px;
+	position:absolute;
+	left:61px;
+	top:267px;
+	font-family:Inria Sans;
+	text-align:left;
+	font-size:20px;
+	letter-spacing:0;
+}
+.e5_5 { 
+	color:rgba(255, 255, 255, 1);
+	width:331px;
+	height:64px;
+	position:absolute;
+	left:161px;
+	top:54px;
+	font-family:Playfair Display;
+	text-align:left;
+	font-size:48px;
+	letter-spacing:0;
+}
+.e13_12 { 
+	background-color:rgba(255, 250.5375498533249, 250.5375498533249, 1);
+	width:498px;
+	height:32px;
+	position:absolute;
+	left:61px;
+	top:359px;
+	border-top-left-radius:40px;
+	border-top-right-radius:40px;
+	border-bottom-left-radius:40px;
+	border-bottom-right-radius:40px;
+}
+.e5_6 { 
+	background-color:rgba(255, 250.5375498533249, 250.5375498533249, 1);
+	width:498px;
+	height:32px;
+	position:absolute;
+	left:61px;
+	top:295px;
+	border-top-left-radius:40px;
+	border-top-right-radius:40px;
+	border-bottom-left-radius:40px;
+	border-bottom-right-radius:40px;
+}
+.e5_7 { 
+	background-color:rgba(255, 250.5375498533249, 250.5375498533249, 1);
+	width:498px;
+	height:32px;
+	position:absolute;
+	left:61px;
+	top:427px;
+	border-top-left-radius:40px;
+	border-top-right-radius:40px;
+	border-bottom-left-radius:40px;
+	border-bottom-right-radius:40px;
+}
+.e5_8 { 
+	background-color:rgba(73.00000324845314, 105.00000134110451, 137.00000703334808, 0.6899999976158142);
+	width:150px;
+	height:42px;
+	position:absolute;
+	left:61px;
+	top:505px;
+    font-family:Playfair Display;
+	border-top-left-radius:40px;
+	border-top-right-radius:40px;
+	border-bottom-left-radius:40px;
+	border-bottom-right-radius:40px;
+    font-size: 15px;
+    border: 0;
+}
+.e5_9 { 
+	color:rgba(255, 255, 255, 1);
+	width:89px;
+	height:32px;
+	position:absolute;
+	left:92px;
+	top:509px;
+	font-family:Inria Sans;
+	text-align:left;
+	font-size:27px;
+	letter-spacing:0;
+}
+.e5_10 { 
+	color:rgba(255, 255, 255, 1);
+	width:49px;
+	height:24px;
+	position:absolute;
+	left:61px;
+	top:335px;
+	font-family:Inria Sans;
+	text-align:left;
+	font-size:20px;
+	letter-spacing:0;
+}
+.e5_11 { 
+	color:rgba(255, 255, 255, 1);
+	width:82px;
+	height:24px;
+	position:absolute;
+	left:61px;
+	top:404px;
+	font-family:Inria Sans;
+	text-align:left;
+	font-size:20px;
+	letter-spacing:0;
+}
+.e42_189 { 
+	width:360px;
+	height:456px;
+	position:absolute;
+	left:950px;
+	top:161px;
+	background-image:url(image/young_woman_sitting_with_laptop_and_stylus.png);
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+.e47_211 { 
+	color:rgba(255, 255, 255, 1);
+	width:168px;
+	height:18px;
+	position:absolute;
+	left:244px;
+	top:130px;
+	font-family:Inria Serif;
+	text-align:left;
+	font-size:15px;
+	letter-spacing:0;
+}
+.e50_305 { 
+	color:rgba(73.00000324845314, 105.00000134110451, 137.00000703334808, 1);
+	width:162px;
+	height:34px;
+	position:absolute;
+    left:1350px;
+	top:9px;
+	font-family:Inknut Antiqua;
+	text-align:right;
+	font-size:15px;
+	letter-spacing:0;
+}
+input{
+    border-width: 5px;
+}
