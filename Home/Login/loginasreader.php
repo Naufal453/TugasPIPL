@@ -21,16 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verifikasi password
         if (password_verify($password, $user['password'])) {
             // Mengecek peran pengguna
-            if ($user['role'] === 'writer') {
+            if ($user['role'] === 'reader') {
                 // Login berhasil
                 $_SESSION['loggedin'] = true;
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
 
-                header("Location: ../home.php");
+                header("Location: ../homereader.php");
                 exit();
             } else {
-                // Pengguna bukan penulis
+                // Pengguna bukan pembaca
                 echo "Anda tidak memiliki izin untuk mengakses halaman ini.";
             }
         } else {
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="./style/login.css">
 </head>
 <body>
-    <form action="login.php" method="post">
+    <form action="loginasreader.php" method="post">
         <div class="e13_2">
             <div class="e13_3">
                 
