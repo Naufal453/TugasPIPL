@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style/login.css">
+    <link rel="stylesheet" href="http://localhost/Tugaspipl/Home/Login/style/login.css">
 </head>
 <body>
     <form action="loginasreader.php" method="post">
@@ -68,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="e13_10">Username</span>
             <span class="e13_11">Password</span>
             <div class="e50_306"></div>
+            <br>
+            <a href="http://localhost/Tugaspipl/Home/choose.php" style="position:absolute;margin-left:70px;margin-top:550px;font-size:20px;">back</a>
         </div>
         <br>
     </form>

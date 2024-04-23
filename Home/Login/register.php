@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Inria+Serif&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style/register.css">
+<link rel="stylesheet" href="http://localhost/Tugaspipl/Home/Login/style/register.css">
 <style>
 
 </style>
@@ -59,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div  class="e42_189"></div>
         <span  class="e47_211">Register your account as a writer!</span>
         <span  class="e50_305">Alternate Arc Archive</span>
+        <br>
+            <a href="http://localhost/Tugaspipl/Home/choose.php" style="position:absolute;margin-left:70px;margin-top:550px;font-size:20px;">back</a>
     </div>
 </form>
 
