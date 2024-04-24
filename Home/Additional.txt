@@ -1,4 +1,0 @@
-1. Input Gambar pada /write/input.php
-2. Menampilkan gambar dari yang sudah di input di ./home.php
-
-MENAMBAHKAN FITUR LIKE PADA TIAP STORY
