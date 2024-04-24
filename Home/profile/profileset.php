@@ -26,14 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Retrieve form data
-    $username = $_POST['username'];
+    $new_username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password']; // Password should be hashed before storing in database
 
     // Update user information in the database
     $sql = "UPDATE users SET username=?, email=?, password=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $username, $email, $password, $_SESSION['user_id']);
+    $stmt->bind_param("sssi", $new_username, $email, $password, $_SESSION['user_id']);
 
     if ($stmt->execute()) {
         echo "<p class='text-success'>Profile updated successfully.</p>";
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Story Listing and Submission</title>
+    <title>Profile Settings</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style/profileset.css">
 </head>
@@ -87,7 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2 style="margin-left: 50px;margin-right: 50px;">Profile Settings</h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <label style="margin-left: 50px;margin-right: 50px;"for="username">Username:</label>
-        <input style="margin-left: 50px;margin-right: 50px;"type="text" id="username" name="username" required><br><br>
+        <!-- Display the current username -->
+        <input style="margin-left: 50px;margin-right: 50px;"type="text" id="username" name="username" value="<?php echo $_SESSION['username']; ?>" required><br><br>
 
         <label style="margin-left: 50px;margin-right: 50px;"for="email">Email:</label>
         <input style="margin-left: 50px;margin-right: 50px;"type="email" id="email" name="email" required><br><br>

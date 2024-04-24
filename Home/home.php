@@ -46,6 +46,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <img style="width:36px;height:36px;" src="image\user_1077012.png" href="#">
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./logout.php" style="background-color:red;">
+                            Log out
+                        </a>
+                    </li>
                 </ul>
         </div>
     </nav>

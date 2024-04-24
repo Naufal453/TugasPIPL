@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2 style="margin-left: 50px;margin-right: 50px;">Profile Settings</h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <label style="margin-left: 50px;margin-right: 50px;"for="username">Username:</label>
-        <input style="margin-left: 50px;margin-right: 50px;"type="text" id="username" name="username" required><br><br>
+        <input style="margin-left: 50px;margin-right: 50px;"type="text" id="username" name="username" value="<?php echo $_SESSION['username']; ?>" required><br><br>
 
         <label style="margin-left: 50px;margin-right: 50px;"for="email">Email:</label>
         <input style="margin-left: 50px;margin-right: 50px;"type="email" id="email" name="email" required><br><br>
