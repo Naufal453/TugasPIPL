@@ -22,19 +22,22 @@ body {
     margin-right: 10px;
 }
 
+
 .nav-link{
-    
     border:transparent;
     border-radius:35px;
     box-shadow:10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .nav-link:hover{
     background-color:#E3FEF7;
     border:transparent;
     border-radius:35px;
     box-shadow:5px;
 }
+
+
 #search{
     border:transparent;
     background-color:#77b0aa;
@@ -87,3 +90,4 @@ body {
 .mt-5 {
     margin-top: 3rem;
 }
+
