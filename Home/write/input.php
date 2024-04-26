@@ -30,11 +30,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Fetch the username from the session
     $author = $_SESSION['username'];
     $description = $_POST['description'];
+    $fandom = $_POST['fandom'];
+    $language = $_POST['language'];
+    $status = $_POST['status'];
+    $series = $_POST['series'];
+    $characters = $_POST['characters'];
+    $relationship = $_POST['relationship'];
+    $addtags = $_POST['addtags'];
 
     // Insert data into database
-    $sql = "INSERT INTO stories (title, author, description) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO stories (title, author, description, Fandom, Language, Status, Series, Characters, Relationship, Addtags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $title, $author, $description);
+    $stmt->bind_param("ssssssssss", $title, $author, $description, $fandom, $language, $status, $series, $characters, $relationship, $addtags);
 
     if ($stmt->execute()) {
         echo "<p class='text-success'>Story submitted successfully.</p>";
@@ -84,68 +91,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 <body style="background-color:#E3FEF7;">
     <div class="container">
-        <h1 class="mt-5 mb-4">Story Listing</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <!-- Story Listing -->
-            <?php
-                // Start session if not already started
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
+        <h1 class="mt-5 mb-4">Writer Dashboard</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    // Database connection
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $database = "alternate_arc";
 
-                // Check if user is logged in
-                if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-                    // Redirect to login page
-                    header("Location: ../Login/login.php");
-                    exit;
-                }
+                    // Establish connection
+                    $conn = new mysqli($servername, $username, $password, $database);
 
-                // Database connection
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $database = "alternate_arc";
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
 
-                // Establish connection
-                $conn = new mysqli($servername, $username, $password, $database);
+                    // Fetch stories authored by the logged-in user
+                    $author = $_SESSION['username'];
+                    $sql = "SELECT id, title, description FROM stories WHERE author = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("s", $author);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row['title'] . "</td>";
+                            echo "<td>" . $row['description'] . "</td>";
+                            echo "<td>
+                                    <a href='edit_story.php?id=" . $row['id'] . "'>Edit</a> | 
+                                    <a href='delete_story.php?id=" . $row['id'] . "'>Delete</a>
+                                  </td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='3'>No stories found.</td></tr>";
+                    }
 
-                // Fetch the latest added story for the logged-in user
-                $user_id = $_SESSION['user_id']; // Assuming you have stored the user ID in the session variable
-                $sql = "SELECT title, author, description FROM stories WHERE user_id = ? ORDER BY id DESC LIMIT 1"; // Assuming 'id' is the primary key column
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $user_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-
-                if ($result->num_rows > 0) {
-                    // Output the latest story
-                    $row = $result->fetch_assoc();
-                    echo '<div class="col">';
-                    echo '<div class="card">';
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">' . $row["title"] . '</h5>';
-                    echo '<h6 class="card-subtitle mb-2 text-muted">Author: ' . $row["author"] . '</h6>';
-                    echo '<p class="card-text">' . $row["description"] . '</p>';
-                    echo '</div>'; // close card-body
-                    echo '</div>'; // close card
-                    echo '</div>'; // close col
-                } else {
-                    echo "<div class='col'><p>No stories available.</p></div>";
-                }
-
-                // Close statement and connection
-                $stmt->close();
-                $conn->close();
+                    // Close statement and connection
+                    $stmt->close();
+                    $conn->close();
                 ?>
-
-
-
-        </div> <!-- close row -->
+            </tbody>
+        </table>
 
         <hr>
 
@@ -159,7 +158,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="description">Tell the story:</label>
                 <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+                <label for="fandom">Fandom:</label>
+                <input type="text" class="form-control" id="fandom" name="fandom">
+            </div>
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <input type="text" class="form-control" id="language" name="language">
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <input type="text" class="form-control" id="status" name="status">
+            </div>
+            <div class="form-group">
+                <label for="series">Series:</label>
+                <input type="text" class="form-control" id="series" name="series">
+            </div>
+            <div class="form-group">
+                <label for="characters">Characters:</label>
+                <input type="text" class="form-control" id="characters" name="characters">
+            </div>
+            <div class="form-group">
+                <label for="relationship">Relationship:</label>
+                <input type="text" class="form-control" id="relationship" name="relationship">
+            </div>
+            <div class="form-group">
+                <label for="addtags">Tags:</label>
+                <input type="text" class="form-control" id="addtags" name="addtags">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-bottom:20px;">Submit</button>
         </form>
     </div> <!-- close container -->
 

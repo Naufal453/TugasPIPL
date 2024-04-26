@@ -78,7 +78,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     // Output data of each row
                     while ($row = $result->fetch_assoc()) {
                         echo '<div class="col" style="margin-bottom:30px;">';
-                        echo '<a href="./read/story.php?id=' . $row["id"] . '" class="card-link">';
+                        echo '<a href="./read/storyread.php?id=' . $row["id"] . '" class="card-link">';
                         echo '<div class="story card">';
                         echo '<div class="card-body" >';
                         echo '<h5 class="card-title">' . $row["title"] . '</h5>';

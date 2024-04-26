@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=3"> 
 
 </head>
-<body style="background-color:#E3FEF7;">
+<body style="background-color:#E3FEF7;";>
         <div class="container">
             <div class="sidebar">
                 <ul>
-                    <a href="../home.php">Kembail ke Home</a>
+                    <a href="../homereader.php">Kembail ke Home</a>
                     <br>
                     <br>
                     <li><?php include './include/sidebar.php'?></li>
