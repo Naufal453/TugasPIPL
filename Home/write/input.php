@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Story Listing and Submission</title>
+    <title>Writer Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style/input.css">
 </head>
@@ -96,7 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Description</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -128,10 +127,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td>" . $row['title'] . "</td>";
-                            echo "<td>" . $row['description'] . "</td>";
                             echo "<td>
                                     <a href='edit_story.php?id=" . $row['id'] . "'>Edit</a> | 
-                                    <a href='delete_story.php?id=" . $row['id'] . "'>Delete</a>
+                                    <a href='delete_story.php?id=" . $row['id'] . "'>Delete</a> |
+                                    <a href='story.php?id=" . $row['id'] . "'>Review</a> 
                                   </td>";
                             echo "</tr>";
                         }
@@ -155,8 +154,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" class="form-control" id="title" name="title" required>
             </div>
             <div class="form-group">
-                <label for="description">Tell the story:</label>
-                <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                <label for="description">Synopsis:</label>
+                <textarea class="form-control" id="description" name="description" maxlength="1500" rows="5" required></textarea>
             </div>
             <div class="form-group">
                 <label for="fandom">Fandom:</label>

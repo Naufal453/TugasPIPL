@@ -13,7 +13,7 @@
                     $story_id = $_GET['id'];
                     
                     // Prepare and execute SQL query
-                    $stmt = $conn->prepare("SELECT title, description FROM stories WHERE id = ?");
+                    $stmt = $conn->prepare("SELECT description FROM stories WHERE id = ?");
                     $stmt->bind_param("i", $story_id);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -22,10 +22,9 @@
                         // Fetch story details
                         $row = $result->fetch_assoc();
                         $description = $row["description"];
-                        $title = $row["title"];
 
                         // Output story description
-                        echo '<h1 style="text-align: center;">' . $title .'</h1><br>';
+                        echo '<h1 style="text-align: center;padding-top:10px;">' .'Synopsis' .'</h1><br>';
                         echo '<p>' . $description . '</p>';
                         
                     } else {

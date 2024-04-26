@@ -7,6 +7,7 @@
     flex: 1; /* Let content take remaining space */
     margin-left: 10px; /* Adjusted margin for better spacing *//* Adjusted margin for better spacing */
     width: 100%;
+
 }
 .sidebar {
     flex: 0 0 100%; /* Sidebar should take full width on small screens */
@@ -31,12 +32,16 @@
     border-right: 2px solid;
     border-radius: 10px;
     padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .summary1{
     background-color: antiquewhite;
     box-shadow: 0 0 5px rgb(0, 0, 3);
     border-right: 2px solid;
     border-radius: 10px;
-    padding-left: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-right: 20px;
 }
 

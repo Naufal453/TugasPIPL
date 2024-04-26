@@ -38,10 +38,10 @@ if(isset($_GET['id']) && !empty(trim($_GET['id']))){
     if($result->num_rows === 1){
         $row = $result->fetch_assoc();
         
-        // Now you can access the $row variable
+        
         $author = $row["author"];
 
-
+        
         echo '<p>'. 'Author:' . ' '. $author . '</p>';
 
 
