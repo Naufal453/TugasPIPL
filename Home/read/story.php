@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="./style/story.css">
-    <meta name="viewport" content="width=device-width, initial-scale=3"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body style="background-color:#E3FEF7;">
@@ -26,12 +26,7 @@
         </div>
             
             
-                <!-- <div class="buttons">
-                    <button class="vote-button"><img src="asset/vote button.svg" alt="vote-button"></button>
-                    <button class="comment-button"><img src="asset/comment button.svg" alt="comment-button"></button>
-                    <button class="prev-button"><img src="asset/previous chapter button.svg" alt="prev-button"></button>
-                    <button class="next-button"><img src="asset/next chapter button.svg" alt="next-button"></button>
-                </div> -->
+
 
 </body>
 </html>

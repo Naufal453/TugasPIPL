@@ -15,8 +15,8 @@ body {
 
 .container-fluid {
     background-color: #135D66;
-    padding-bottom: 17px;
     padding-top: 10px;
+    padding-bottom: 17px;
 }
 
 .nav-item {
@@ -26,32 +26,72 @@ body {
 
 .nav-link {
     background-color: transparent;
-    border: transparent;
+    border: none;
     border-radius: 35px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .nav-link:hover {
     background-color: #E3FEF7;
-    border: transparent;
+    border: none;
     border-radius: 35px;
     box-shadow: 5px;
 }
 
 #search {
-    border: transparent;
     background-color: #77b0aa;
+    border: none;
+    border-radius: 50%;
     width: 72px;
     height: 62px;
-    border-radius: 50%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #search:hover {
-    border: transparent;
     background-color: #E3FEF7;
+    border: none;
+    border-radius: 50%;
     width: 72px;
     height: 62px;
-    border-radius: 50%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tag-btn {
+    margin: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tag-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.tag-btn, #selected-tags span {
+    margin: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 5px;
+}
+
+#selected-tags button {
+    margin-left: 5px;
+    color: red;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.text-success {
+    color: green;
+}
+
+.text-danger {
+    color: red;
+}
+.form-control{
+    margin-bottom: 10px;
 }

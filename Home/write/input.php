@@ -183,8 +183,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" class="form-control" id="relationship" name="relationship">
         </div>
         <div class="form-group">
-            <label for="addtags">Tags:</label>
-            <input type="text" class="form-control" id="addtags" name="addtags">
+            <label for="new-tag">Register New Tag:</label>
+            <input type="text" class="form-control" id="new-tag" name="new-tag" placeholder="Enter new tag">
+            <button type="button" class="btn btn-primary" onclick="registerNewTag()">Register Tag</button>
+        </div>
+        <div id="tag-registration-status"></div>
+        <div class="form-group">
+            <label for="tags">Tags:</label>
+                        <input type="text" class="form-control" id="tags" name="addtags" readonly>
+            <div id="tag-options">
+                <button type="button" class="tag-btn" onclick="addTag('Fantasy')">Fantasy</button>
+                <button type="button" class="tag-btn" onclick="addTag('Adventure')">Adventure</button>
+                <button type="button" class="tag-btn" onclick="addTag('Romance')">Romance</button>
+                <!-- Add more buttons as needed -->
+            </div>
+            <div id="selected-tags"></div>
         </div>
         <button type="submit" class="btn btn-primary" style="margin-bottom:20px;">Submit</button>
     </form>
@@ -210,7 +223,77 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
 </div>
+    <script>
+        function addTag(tag) {
+            var input = document.getElementById('tags');
+            var selectedTagsContainer = document.getElementById('selected-tags');
+            // Convert all tags to lowercase for case-insensitive comparison and remove empty entries
+            var currentTags = input.value.split(',').map(function(tag) { return tag.trim().toLowerCase(); }).filter(tag => tag !== "");
 
+            if (!currentTags.includes(tag.toLowerCase())) {
+                currentTags.push(tag.toLowerCase()); // Add the tag in lowercase
+                input.value = currentTags.join(', '); // Ensure no leading commas or spaces
+
+                // Update the display of selected tags
+                var tagSpan = document.createElement('span');
+                tagSpan.textContent = tag + " "; // Display the original case
+                var removeBtn = document.createElement('button');
+                removeBtn.textContent = 'x';
+                removeBtn.onclick = function() { removeTag(tag); };
+                tagSpan.appendChild(removeBtn);
+                selectedTagsContainer.appendChild(tagSpan);
+            } else {
+                // Optionally alert the user that the tag is already added
+                alert("Tag '" + tag + "' is already added.");
+            }
+        }
+
+        function removeTag(tagToRemove) {
+            var input = document.getElementById('tags');
+            var selectedTagsContainer = document.getElementById('selected-tags');
+            // Ensure tags are trimmed, lowercased, and non-empty
+            var currentTags = input.value.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag !== "" && tag !== tagToRemove.toLowerCase());
+
+            // Join the tags with a comma and a space, and update the input value
+            input.value = currentTags.join(', ');
+
+            // Clear and rebuild the display of selected tags
+            selectedTagsContainer.innerHTML = '';
+            currentTags.forEach(tag => {
+                var tagSpan = document.createElement('span');
+                tagSpan.textContent = tag + " "; // Display the original case
+                var removeBtn = document.createElement('button');
+                removeBtn.textContent = 'x';
+                removeBtn.onclick = function() { removeTag(tag); };
+                tagSpan.appendChild(removeBtn);
+                selectedTagsContainer.appendChild(tagSpan);
+            });
+        }
+        function registerNewTag() {
+            var input = document.getElementById('new-tag');
+            var newTag = input.value.trim();
+
+            if (newTag) {
+                // Simulate sending the new tag to a server or adding to a database
+                console.log("Registering new tag:", newTag); // Replace this with actual API call or database insertion logic
+
+                // Update the tag options to include the new tag
+                var tagOptionsContainer = document.getElementById('tag-options');
+                var newTagButton = document.createElement('button');
+                newTagButton.type = 'button';
+                newTagButton.className = 'tag-btn';
+                newTagButton.textContent = newTag;
+                newTagButton.onclick = function() { addTag(newTag); };
+
+                tagOptionsContainer.appendChild(newTagButton);
+
+                document.getElementById('tag-registration-status').innerHTML = `<p class='text-success'>Tag '${newTag}' registered successfully.</p>`;
+                input.value = ''; // Clear the input after successful registration
+            } else {
+                document.getElementById('tag-registration-status').innerHTML = `<p class='text-danger'>Please enter a tag to register.</p>`;
+            }
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
