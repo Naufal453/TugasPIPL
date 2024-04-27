@@ -147,47 +147,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <hr>
 
-        <h1 class="mt-5 mb-4">Submit Your Story</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" id="title" name="title" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Synopsis:</label>
-                <textarea class="form-control" id="description" name="description" maxlength="1500" rows="5" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="fandom">Fandom:</label>
-                <input type="text" class="form-control" id="fandom" name="fandom">
-            </div>
-            <div class="form-group">
-                <label for="language">Language:</label>
-                <input type="text" class="form-control" id="language" name="language">
-            </div>
-            <div class="form-group">
-                <label for="status">Status:</label>
-                <input type="text" class="form-control" id="status" name="status">
-            </div>
-            <div class="form-group">
-                <label for="series">Series:</label>
-                <input type="text" class="form-control" id="series" name="series">
-            </div>
-            <div class="form-group">
-                <label for="characters">Characters:</label>
-                <input type="text" class="form-control" id="characters" name="characters">
-            </div>
-            <div class="form-group">
-                <label for="relationship">Relationship:</label>
-                <input type="text" class="form-control" id="relationship" name="relationship">
-            </div>
-            <div class="form-group">
-                <label for="addtags">Tags:</label>
-                <input type="text" class="form-control" id="addtags" name="addtags">
-            </div>
-            <button type="submit" class="btn btn-primary" style="margin-bottom:20px;">Submit</button>
-        </form>
-    </div> <!-- close container -->
+        <div>
+    <h1 class="mt-5 mb-4">Submit Your Story</h1>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Synopsis:</label>
+            <textarea class="form-control" id="description" name="description" maxlength="1500" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="fandom">Fandom:</label>
+            <input type="text" class="form-control" id="fandom" name="fandom">
+        </div>
+        <div class="form-group">
+            <label for="language">Language:</label>
+            <input type="text" class="form-control" id="language" name="language">
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="text" class="form-control" id="status" name="status">
+        </div>
+        <div class="form-group">
+            <label for="series">Series:</label>
+            <input type="text" class="form-control" id="series" name="series">
+        </div>
+        <div class="form-group">
+            <label for="characters">Characters:</label>
+            <input type="text" class="form-control" id="characters" name="characters">
+        </div>
+        <div class="form-group">
+            <label for="relationship">Relationship:</label>
+            <input type="text" class="form-control" id="relationship" name="relationship">
+        </div>
+        <div class="form-group">
+            <label for="addtags">Tags:</label>
+            <input type="text" class="form-control" id="addtags" name="addtags">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-bottom:20px;">Submit</button>
+    </form>
+    <?php
+    // Define variables and initialize with empty values
+    $title = $description = $fandom = $language = $status = $series = $characters = $relationship = $addtags = "";
+    
+    // Processing form data when form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Validate Title
+        if (empty(trim($_POST["title"]))) {
+            echo "<p class='text-danger'>Title cannot be empty.</p>";
+        } else {
+            $title = trim($_POST["title"]);
+        }
+    
+        // Validate Description
+        if (empty(trim($_POST["description"]))) {
+            echo "<p class='text-danger'>Synopsis cannot be empty.</p>";
+        } else {
+            $description = trim($_POST["description"]);
+        }
+    }
+    ?>
+</div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
