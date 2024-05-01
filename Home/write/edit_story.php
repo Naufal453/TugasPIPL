@@ -12,7 +12,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 // Check if story ID is provided in the URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     // Redirect to dashboard
-    header("Location: writer_dashboard.php");
+    header("Location: /");
     exit;
 }
 

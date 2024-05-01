@@ -1,15 +1,7 @@
 <?php
-// Start session
-session_start();
-
-// Check if user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // Redirect to login page
-    header("Location: ./Login/login.php");
-    exit;
-}
+include 'config/config.php';
+$stories = fetchStories();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +17,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <img style="width:68px;height:68px;"class=navbar-brand src="image\Blue Wood (2).png">
         <form class="d-flex navbar-search" method="GET" action="search.php">
             <input name="query" style="border-radius:15px;box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" style="" id="search" type="submit">
+            <button class="btn btn-outline-success" id="search" type="submit">
                 <img style="width:36px;height:36px;" src="image\search.png" alt="">
             </button>
         </form>
@@ -37,7 +29,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="" href="./profile/profilesetreader.php">
+                        <a class="nav-link"  href="./profile/profilesetreader.php">
                             <img style="width:36px;height:36px;" src="image\user_1077012.png" href="#">
                         </a>
                     </li>
@@ -55,45 +47,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <!-- Story Listing -->
             <?php
-                // 1. Establish database connection
-                $servername = "localhost"; // Change to your server name
-                $username = "root"; // Change to your MySQL username
-                $password = ""; // Change to your MySQL password
-                $database = "alternate_arc"; // Change to your database name
-
-                // Establish connection
-                $conn = new mysqli($servername, $username, $password, $database);
-
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                // Display fetched stories
+                foreach ($stories as $story) {
+                    echo '<div class="col" style="margin-bottom:30px;">';
+                    echo '<a href="./read/storyread.php?id=' . $story["id"] . '" class="card-link">';
+                    echo '<div class="story card">';
+                    echo '<div class="card-body" >';
+                    echo '<h5 class="card-title">' . $story["title"] . '</h5>';
+                    echo '<img src="image\book_3145755.png" style="display: block; margin: auto;width:72px;height:72px;margin-top:70px;">';
+                    echo '<h6 class="card-subtitle mb-2 text-muted" style="text-align:center;position: absolute; bottom: 10px; left: 10px; right: 10px;">Author: ' . $story["author"] . '</h6>';
+                    echo '</div>'; // close card-body
+                    echo '</div>'; // close card
+                    echo '</a>'; // close anchor tag
+                    echo '</div>'; // close col
                 }
-
-                // 2. Execute query to fetch data
-                $sql = "SELECT id,title, author, description FROM stories";
-                $result = $conn->query($sql);
-
-                // Check if there are any stories in the database
-                if ($result->num_rows > 0) {
-                    // Output data of each row
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<div class="col" style="margin-bottom:30px;">';
-                        echo '<a href="./read/storyread.php?id=' . $row["id"] . '" class="card-link">';
-                        echo '<div class="story card">';
-                        echo '<div class="card-body" >';
-                        echo '<h5 class="card-title">' . $row["title"] . '</h5>';
-                        echo '<img src="image\book_3145755.png" style="display: block; margin: auto;width:72px;height:72px;margin-top:70px;">';
-                        echo '<h6 class="card-subtitle mb-2 text-muted" style="text-align:center;position: absolute; bottom: 10px; left: 10px; right: 10px;">Author: ' . $row["author"] . '</h6>';
-                        echo '</div>'; // close card-body
-                        echo '</div>'; // close card
-                        echo '</a>'; // close anchor tag
-                        echo '</div>'; // close col
-                    }
-                } else {
-                    echo "0 results";
-                }
-                // Close database connection
-                $conn->close();
             ?>
         </div> <!-- close row -->
     </div> <!-- close container -->

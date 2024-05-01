@@ -13,16 +13,16 @@
     <img src="./image/Blue Wood (2).png" alt="" width="80" height="80" style="display: inline-block;margin-bottom:30px;">
   </li>
   <li id="row1"class="list-group-item" >
-  <a href="http://localhost/Tugaspipl/Home/Login/login.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Login As Writer</a>
+  <a href="/Tugaspipl/Home/Login/login.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Login As Writer</a>
   </li>
   <li id="row2" class="list-group-item" >
-  <a href="http://localhost/Tugaspipl/Home/Login/register.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Register As Writer</a>
+  <a href="/Tugaspipl/Home/Login/register.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Register As Writer</a>
   </li>
   <li id="row3" class="list-group-item" >
-  <a href="http://localhost/Tugaspipl/Home/Login/loginasreader.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Login As Reader</a>
+  <a href="/Tugaspipl/Home/Login/loginasreader.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Login As Reader</a>
   </li>
   <li id="row4" class="list-group-item" >
-  <a href="http://localhost/Tugaspipl/Home/Login/registerasreader.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Register As Reader</a>
+  <a href="/Tugaspipl/Home/Login/registerasreader.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Register As Reader</a>
   </li>
 </ul>
 </body>

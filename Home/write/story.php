@@ -10,7 +10,7 @@
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li><a href="./input.php">Kembali ke Writer Dashboard</a></li>
+                <li><a href="./">Kembali ke Writer Dashboard</a></li>
                 <li><?php include '../read/include/sidebar.php'?></li>
             </ul>
         </div>
