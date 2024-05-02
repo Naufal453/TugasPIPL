@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2024 at 07:40 AM
+-- Generation Time: Apr 27, 2024 at 12:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,24 +33,32 @@ CREATE TABLE `stories` (
   `author` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `image_path` varchar(255) DEFAULT NULL
+  `image_path` varchar(255) DEFAULT NULL,
+  `Fandom` varchar(255) DEFAULT NULL,
+  `Language` varchar(50) DEFAULT NULL,
+  `Status` varchar(50) DEFAULT NULL,
+  `Series` varchar(255) DEFAULT NULL,
+  `Characters` text DEFAULT NULL,
+  `Relationship` varchar(255) DEFAULT NULL,
+  `Addtags` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `stories`
 --
 
-INSERT INTO `stories` (`id`, `title`, `author`, `description`, `user_id`, `image_path`) VALUES
-(1, 'Revenant', 'Kim Eun Hee', 'Revenant tells the story of Ku San Young who is possessed by a demon after a door from another world opens. Ku San Young will team up with Yeom Hae Sang who can see the demon inside her body. They will find out behind mysterious deaths related to sacred objects.', NULL, NULL),
-(2, 'Twilight', 'Melissa', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', NULL, NULL),
-(3, 'Ultraman', 'Nopal', 'Giant of light', NULL, NULL),
-(4, 'Ultraman', 'Nopal', 'Giant of light', NULL, NULL),
-(5, 'Godzilla', 'Gopal', 'Giant lizard', NULL, NULL),
-(6, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL),
-(7, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL),
-(8, 'tes123', 'Gopal', '123', NULL, NULL),
-(9, 'tesssssssssssss', 'Gopal', 'wewe', NULL, NULL),
-(10, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL);
+INSERT INTO `stories` (`id`, `title`, `author`, `description`, `user_id`, `image_path`, `Fandom`, `Language`, `Status`, `Series`, `Characters`, `Relationship`, `Addtags`) VALUES
+(1, 'Revenant', 'Kim Eun Hee', 'Revenant tells the story of Ku San Young who is possessed by a demon after a door from another world opens. Ku San Young will team up with Yeom Hae Sang who can see the demon inside her body. They will find out behind mysterious deaths related to sacred objects.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Twilight', 'Melissa', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Ultraman', 'Nopal', 'Giant of light', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Ultraman', 'Nopal', 'Giant of light', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Godzilla', 'Gopal', 'Giant lizard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'tes123', 'Gopal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'tesssssssssssss', 'Gopal', 'wewe', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 'tes', 'nopal1234', 'Semerbak durian memenuhi rongga hidung. Siapa pun yang iseng lewat di depan pondok bambu dengan bayang (kursi dari bambu) panjang ini dipastikan menoleh, tercuri perhatiannya. Buah durian kedua yang dibelah bapak selepas turun dari mobil. Harganya murah saja, tiga puluh ribu ukuran sedang. Ayolah, siapa yang dengan senang hati mau melewatkan kenikmatan buah yang disebut king of fruit itu? Sebegitu lahapnya bapak mencomot durian di tengah obrolan ringannya dengan si penjual. Sensasi lembut nan tebal daging buah dengan biji kecil dan warna sempurna kuning cerah menjadi primadona. Ya…seperti kataku di awal, jangan lupakan bau kenikmatan surga dunia yang tumbuh dari sebatang pohon. Jemariku ikut meraba segumpal buah kaya rasa, tetapi bukan sensasi kenikmatan manis yang kukejar dalam setiap gigitan buahnya. Sungguh, jauh dari segala hal tentang buah. Sedikit menggelitik memang, bagaimana mungkin benakku seketika aktif berkelana membuka file ingatan lama ketika bapak sedang terbuai meminum air dengan cawan kulit durian. File tentang rentang nyawa yang diberikan kepada hati milikku, denyut nadi berisi kekaguman kepada seorang pria jangkung dengan senyum rupawan yang menurut versiku mampu mengalahkan semua total kemanisan buah durian yang menggantung di desa kaki gunung ini. Apakah dari kalian ada yang pernah terpikir tentang sensasi itu? Pikiranku tenggelam dalam setiap larutan memori tanpa diminta. Mengulang gemeletuk sepatu dan ingar-bingar tahun-tahun perkuliahan. “Aku tidak bisa', NULL, NULL, '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -93,7 +101,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `updat
 (26, 'rwes', 'rwes@gmail.com', '$2y$10$kya1gyGUPiR84qfTqV3JjelaCzLaYQjie2chaE8VzYO9OHjNzUAMu', '2024-04-23 05:02:15', '2024-04-23 05:02:15', 'writer'),
 (27, '54321', 'weriter@gmail.com', '$2y$10$7ChQANTl3MQ9/3SHYaK/kea.jY.EWgz71vX3SPZRJ.pRo65rZZG1W', '2024-04-23 05:03:30', '2024-04-23 05:03:30', 'writer'),
 (28, '321', '2@1.com', '$2y$10$AQnVE7Vi8XVsvT49FimHHeLZkdKahgAYJsqJRfLl5EXJ1NaBsUit6', '2024-04-23 05:04:00', '2024-04-23 05:04:00', 'writer'),
-(29, 'writer43', 'writer431@gmail.com', '$2y$10$eaRxGyalDbY4e6vo4ukLXOqdXp.WpdC4M5zodQ0ePpG30G6qNoQve', '2024-04-23 05:09:01', '2024-04-23 05:09:01', 'reader');
+(29, 'writer43', 'writer431@gmail.com', '$2y$10$eaRxGyalDbY4e6vo4ukLXOqdXp.WpdC4M5zodQ0ePpG30G6qNoQve', '2024-04-23 05:09:01', '2024-04-23 05:09:01', 'reader'),
+(30, 'nopal1234', 'nopal1234@gmail.com', '$2y$10$.OrQAbbnJoNMNV6mZRFMFOJsAlkVWfuZnnx8BLNc02iv8Lf7Ptx1e', '2024-04-23 06:20:43', '2024-04-23 06:20:43', 'writer');
 
 --
 -- Indexes for dumped tables
@@ -121,13 +130,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
