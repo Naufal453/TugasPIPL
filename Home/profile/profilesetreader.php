@@ -1,50 +1,28 @@
 <?php
-// Start session
-session_start();
+    include '../config/config.php';
+    $conn = connectDatabase();
+    // Check if the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// Check if user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // Redirect to login page
-    header("Location: ../Login/login.php");
-    exit;
-}
+        // Retrieve form data
+        $new_username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password']; // Password should be hashed before storing in database
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database connection
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "alternate_arc";
+        $sql = "UPDATE users SET username=?, email=?, password=? WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssi", $new_username, $email, $password, $_SESSION['user_id']);
 
-    // Establish connection
-    $conn = new mysqli($servername, $username, $password, $database);
+        if ($stmt->execute()) {
+            echo "<p class='text-success'>Profile updated successfully.</p>";
+        } else {
+            echo "<p class='text-danger'>Error updating profile: " . $conn->error . "</p>";
+        }
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        // Close connection
+        $stmt->close();
+        $conn->close();
     }
-
-    // Retrieve form data
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password']; // Password should be hashed before storing in database
-
-    // Update user information in the database
-    $sql = "UPDATE users SET username=?, email=?, password=? WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $username, $email, $password, $_SESSION['user_id']);
-
-    if ($stmt->execute()) {
-        echo "<p class='text-success'>Profile updated successfully.</p>";
-    } else {
-        echo "<p class='text-danger'>Error updating profile: " . $conn->error . "</p>";
-    }
-
-    // Close connection
-    $stmt->close();
-    $conn->close();
-}
 ?>
 
 <!DOCTYPE html>

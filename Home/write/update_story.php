@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssi", $title, $description, $id);
 
     if ($stmt->execute()) {
-        header("Location: input.php");
+        header("Location: index.php");
         exit;
     } else {
         echo "Error updating story: " . $stmt->error;

@@ -3,7 +3,7 @@ session_start();
 
 function checkLoggedIn(){
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: ../choose.php");
+        header("Location: ../Home/choose.php");
         exit;
     }
 
@@ -26,7 +26,7 @@ function connectDatabase(){
 function fetchStories(){
     checkLoggedIn();
     $conn = connectDatabase();
-    $sql = "SELECT id, title, author, description FROM stories";
+    $sql = "SELECT Addtags, id, title, author, description FROM stories";
     $result = $conn->query($sql);
 
     
@@ -81,38 +81,30 @@ function deleteStory($story_id) {
     // Check if story ID is provided
     if (empty($story_id)) {
         // Redirect to dashboard or appropriate page
-        header("Location: writer_dashboard.php");
+        header("Location: ../write/index.php");
         exit;
     }
 
-    // Fetch the story details based on the provided ID
+    // Delete associated chapters first
+    $delete_chapters_sql = "DELETE FROM chapters WHERE story_id = ?";
+    $delete_chapters_stmt = $conn->prepare($delete_chapters_sql);
+    $delete_chapters_stmt->bind_param("i", $story_id);
+    $delete_chapters_stmt->execute();
+    $delete_chapters_stmt->close();
+
+    // Delete the story
     $author = $_SESSION['username'];
-    $sql = "SELECT * FROM stories WHERE id = ? AND author = ?";
+    $sql = "DELETE FROM stories WHERE id = ? AND author = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("is", $story_id, $author);
     $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows == 1) {
-        // Delete the story
-        $delete_sql = "DELETE FROM stories WHERE id = ?";
-        $delete_stmt = $conn->prepare($delete_sql);
-        $delete_stmt->bind_param("i", $story_id);
-        $delete_stmt->execute();
-        
-        // Close statement
-        $delete_stmt->close();
-    } else {
-        // Story not found or not authored by the logged-in user
-        echo "Story not found or you don't have permission to delete.";
-    }
 
     // Close connection and statement
     $stmt->close();
     $conn->close();
 
     // Redirect to writer dashboard or appropriate page
-    header("Location: input.php");
+    header("Location: index.php");
     exit;
 }
 ?>

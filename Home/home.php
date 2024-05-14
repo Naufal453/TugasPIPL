@@ -21,29 +21,29 @@ $stories = fetchStories();
                 <img style="width:36px;height:36px;" src="image\search.png" alt="">
             </button>
         </form>
-                <ul class="navbar-nav ms-auto"> <!-- Adjusted to mx-auto -->
-                    <li class="nav-item">
-                        <button class="nav-link active" style="background-color:#E3FEF7;border:transparent;border-radius:35px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" aria-current="page" href="#">
-                            <img style="width:36px;height:36px;" src="image\icons8-home-480.png" href="#">
-                            <div style="position: absolute; background-color: #E3FEF7; width: 10px; height: 10px; border-radius: 50%;margin-left:13px;margin-top:10px;"></div>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./write" >
-                            <img style="width:36px;height:36px;" src="image\bookshelf (1).png" href="">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="" href="./profile/profileset.php">
-                            <img style="width:36px;height:36px;" src="image\user_1077012.png" href="#">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./logout.php" style="background-color:red;">
-                            Log out
-                        </a>
-                    </li>
-                </ul>
+            <ul class="navbar-nav ms-auto"> 
+                <li class="nav-item">
+                    <button class="nav-link active" style="background-color:#E3FEF7;border:transparent;border-radius:35px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" aria-current="page" href="#">
+                        <img style="width:36px;height:36px;" src="image\icons8-home-480.png" href="#">
+                        <div style="position: absolute; background-color: #E3FEF7; width: 10px; height: 10px; border-radius: 50%;margin-left:13px;margin-top:10px;"></div>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./write" >
+                        <img style="width:36px;height:36px;" src="image\bookshelf (1).png" href="">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="" href="./profile/profileset.php">
+                        <img style="width:36px;height:36px;" src="image\user_1077012.png" href="#">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./logout.php" style="background-color:red;">
+                        Log out
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 </header>
@@ -66,8 +66,7 @@ $stories = fetchStories();
                 }
             ?>
         </div> <!-- close row -->
-    </div> <!-- close container -->
-    <!-- JavaScript Bundle with Popper -->
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

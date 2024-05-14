@@ -1,33 +1,13 @@
 <?php
-// Start session
-session_start();
+include '../config/config.php';
 
-// Check if user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // Redirect to login page
-    header("Location: ../Login/login.php");
-    exit;
-}
+$conn = connectDatabase();
 
 // Check if story ID is provided in the URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     // Redirect to dashboard
     header("Location: /");
     exit;
-}
-
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "alternate_arc";
-
-// Establish connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
 }
 
 // Fetch the story details based on the provided ID
@@ -76,7 +56,7 @@ $conn->close();
             </div>
             <!-- Add other fields here for editing -->
             <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a href="input.php" class="btn btn-secondary">Cancel</a>
+            <a href="index.php" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 
