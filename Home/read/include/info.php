@@ -1,28 +1,6 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 
-// Check if user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // Redirect to login page
-    header("Location: ../Login/login.php");
-    exit;
-}
-
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "alternate_arc";
-
-// Establish connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = connectDatabase();
 
 // Fetch story based on ID
 if(isset($_GET['id']) && !empty(trim($_GET['id']))){

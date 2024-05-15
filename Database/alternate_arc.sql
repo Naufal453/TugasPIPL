@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 11:34 AM
+-- Generation Time: May 15, 2024 at 07:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,6 +34,36 @@ CREATE TABLE `chapters` (
   `chapter_content` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chapters`
+--
+
+INSERT INTO `chapters` (`id`, `story_id`, `chapter_title`, `chapter_content`, `created_at`) VALUES
+(9, 24, 'tes', 'tes', '2024-05-15 06:54:16'),
+(10, 24, '321', '321', '2024-05-15 17:19:46'),
+(11, 25, 'tessssssssssssss', 'tessssssssssssss', '2024-05-15 17:20:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `comment_text` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `chapter_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `comment_text`, `created_at`, `chapter_id`) VALUES
+(17, 31, 'HALO', '2024-05-15 17:36:44', 10);
 
 -- --------------------------------------------------------
 
@@ -73,7 +103,9 @@ INSERT INTO `stories` (`id`, `title`, `author`, `description`, `user_id`, `image
 (9, 'tesssssssssssss', 'Gopal', 'wewe', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (17, 'tes', 'nopal1234', 'Semerbak durian memenuhi rongga hidung. Siapa pun yang iseng lewat di depan pondok bambu dengan bayang (kursi dari bambu) panjang ini dipastikan menoleh, tercuri perhatiannya. Buah durian kedua yang dibelah bapak selepas turun dari mobil. Harganya murah saja, tiga puluh ribu ukuran sedang. Ayolah, siapa yang dengan senang hati mau melewatkan kenikmatan buah yang disebut king of fruit itu? Sebegitu lahapnya bapak mencomot durian di tengah obrolan ringannya dengan si penjual. Sensasi lembut nan tebal daging buah dengan biji kecil dan warna sempurna kuning cerah menjadi primadona. Ya…seperti kataku di awal, jangan lupakan bau kenikmatan surga dunia yang tumbuh dari sebatang pohon. Jemariku ikut meraba segumpal buah kaya rasa, tetapi bukan sensasi kenikmatan manis yang kukejar dalam setiap gigitan buahnya. Sungguh, jauh dari segala hal tentang buah. Sedikit menggelitik memang, bagaimana mungkin benakku seketika aktif berkelana membuka file ingatan lama ketika bapak sedang terbuai meminum air dengan cawan kulit durian. File tentang rentang nyawa yang diberikan kepada hati milikku, denyut nadi berisi kekaguman kepada seorang pria jangkung dengan senyum rupawan yang menurut versiku mampu mengalahkan semua total kemanisan buah durian yang menggantung di desa kaki gunung ini. Apakah dari kalian ada yang pernah terpikir tentang sensasi itu? Pikiranku tenggelam dalam setiap larutan memori tanpa diminta. Mengulang gemeletuk sepatu dan ingar-bingar tahun-tahun perkuliahan. “Aku tidak bisa', NULL, NULL, '', '', '', '', '', '', ''),
-(20, 'tes', 'reader', 'ts', NULL, NULL, 'tes', 'tes', 'te', 'tes', 'tes', 'tes', 'adventure, romance');
+(20, 'tes', 'reader', 'ts', NULL, NULL, 'tes', 'tes', 'te', 'tes', 'tes', 'tes', 'adventure, romance'),
+(24, 'tes', 'writer', 'tes', NULL, NULL, 'tes', 'tes', 'tes', 'tes', 'tes', 'tes', 'adventure, tes'),
+(25, 'tessssssssssssss', 'writer', 'tessssssssssssss', NULL, NULL, 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'adventure');
 
 -- --------------------------------------------------------
 
@@ -133,6 +165,14 @@ ALTER TABLE `chapters`
   ADD KEY `story_id` (`story_id`);
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `fk_comments_chapters` (`chapter_id`);
+
+--
 -- Indexes for table `stories`
 --
 ALTER TABLE `stories`
@@ -154,13 +194,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chapters`
 --
 ALTER TABLE `chapters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -177,6 +223,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `chapters`
   ADD CONSTRAINT `chapters_ibfk_1` FOREIGN KEY (`story_id`) REFERENCES `stories` (`id`);
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_comments_chapters` FOREIGN KEY (`chapter_id`) REFERENCES `chapters` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

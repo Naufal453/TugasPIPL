@@ -1,12 +1,6 @@
 
                 <?php
-                // Establish database connection
-                $conn = new mysqli("localhost", "root", "", "alternate_arc");
-
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+                $conn = connectDatabase();
 
                 // Retrieve story data based on the ID passed in the URL
                 if (isset($_GET['id'])) {
