@@ -85,22 +85,54 @@ function deleteStory($story_id) {
         exit;
     }
 
-    // Delete associated chapters first
-    $delete_chapters_sql = "DELETE FROM chapters WHERE story_id = ?";
-    $delete_chapters_stmt = $conn->prepare($delete_chapters_sql);
-    $delete_chapters_stmt->bind_param("i", $story_id);
-    $delete_chapters_stmt->execute();
-    $delete_chapters_stmt->close();
+    // Begin transaction
+    $conn->begin_transaction();
 
-    // Delete the story
-    $author = $_SESSION['username'];
-    $sql = "DELETE FROM stories WHERE id = ? AND author = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $story_id, $author);
-    $stmt->execute();
+    try {
+        // Get the chapter IDs related to the story
+        $get_chapters_sql = "SELECT id FROM chapters WHERE story_id = ?";
+        $get_chapters_stmt = $conn->prepare($get_chapters_sql);
+        $get_chapters_stmt->bind_param("i", $story_id);
+        $get_chapters_stmt->execute();
+        $result = $get_chapters_stmt->get_result();
+        $chapter_ids = $result->fetch_all(MYSQLI_ASSOC);
+        $get_chapters_stmt->close();
 
-    // Close connection and statement
-    $stmt->close();
+        // Delete related rows in chapter_likes for each chapter
+        foreach ($chapter_ids as $chapter) {
+            $chapter_id = $chapter['id'];
+            $delete_likes_sql = "DELETE FROM chapter_likes WHERE chapter_id = ?";
+            $delete_likes_stmt = $conn->prepare($delete_likes_sql);
+            $delete_likes_stmt->bind_param("i", $chapter_id);
+            $delete_likes_stmt->execute();
+            $delete_likes_stmt->close();
+        }
+
+        // Delete the chapters associated with the story
+        $delete_chapters_sql = "DELETE FROM chapters WHERE story_id = ?";
+        $delete_chapters_stmt = $conn->prepare($delete_chapters_sql);
+        $delete_chapters_stmt->bind_param("i", $story_id);
+        $delete_chapters_stmt->execute();
+        $delete_chapters_stmt->close();
+
+        // Delete the story
+        $author = $_SESSION['username'];
+        $sql = "DELETE FROM stories WHERE id = ? AND author = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("is", $story_id, $author);
+        $stmt->execute();
+        $stmt->close();
+
+        // Commit transaction
+        $conn->commit();
+
+    } catch (Exception $e) {
+        // Rollback transaction if there's an error
+        $conn->rollback();
+        throw $e;
+    }
+
+    // Close connection
     $conn->close();
 
     // Redirect to writer dashboard or appropriate page

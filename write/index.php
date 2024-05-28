@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "<td>
                                     <a href='edit_story.php?id=" . $row['id'] . "'>Edit</a> | 
                                     <a href='delete_story.php?id=" . $row['id'] . "'>Delete</a> |
-                                    <a href='../read/story.php?id=" . $row['id'] . "'>Review</a> |
+                                    <a href='../read/story.writer.php?id=" . $row['id'] . "'>Review</a> |
                                     <a href='add_chapter.php?id=" . $row['id'] . "'>Add Chapter</a>
                                   </td>";
                             echo "</tr>";

@@ -14,5 +14,3 @@ $story_id = $_GET['id'];
 // Call the deleteStory function
 deleteStory($story_id);
 ?>
-
-
