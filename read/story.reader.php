@@ -14,7 +14,7 @@ include '../config/config.php'
         <div class="container">
             <div class="sidebar">
                 <ul>
-                    <a href="../home.reader.php">Kembail ke Home</a>
+                    <a href="../reader">Kembail ke Home</a>
                     <br>
                     <br>
                     <li><?php include './include/sidebar.php'?></li>

@@ -38,11 +38,6 @@ $stories = fetchStories();
                         <img style="width:36px;height:36px;" src="../image/user_1077012.png" href="#">
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../logout.php" style="background-color:red;">
-                        Log out
-                    </a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -53,7 +48,7 @@ $stories = fetchStories();
             <?php
                 foreach ($stories as $story) {
                     echo '<div class="col" style="margin-bottom:30px;">';
-                    echo '<a href="./read/story.php?id=' . $story["id"] . '" class="card-link">';
+                    echo '<a href="../read/story.writer.php?id=' . $story["id"] . '" class="card-link">';
                     echo '<div class="story card">';
                     echo '<div class="card-body" >';
                     echo '<h5 class="card-title">' . $story["title"] . '</h5>';

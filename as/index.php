@@ -10,7 +10,7 @@
 <body>
 <ul class="list-group"style="text-align:center;margin-top:15%;">
   <li>
-    <img src="./image/Blue Wood (2).png" alt="" width="80" height="80" style="display: inline-block;margin-bottom:30px;">
+    <img src="../image/Blue Wood (2).png" alt="" width="80" height="80" style="display: inline-block;margin-bottom:30px;">
   </li>
   <li id="row1"class="list-group-item" >
   <a href="/Tugaspipl/Login/login.writer.php" style="padding-left:10px;padding-right:10px;padding-bottom:10px;padding-top:10px;">Login As Writer</a>

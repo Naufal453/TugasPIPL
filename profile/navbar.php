@@ -12,7 +12,7 @@
         </a>
         <ul class="navbar-nav ms-auto"> <!-- Adjusted to mx-auto -->
             <li class="nav-item">
-                <a class="nav-link" href="./logout.php" style="background-color:red;">
+                <a class="nav-link" href="../logout.php" style="background-color:red;">
                     Log out
                 </a>
             </li>

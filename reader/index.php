@@ -1,5 +1,5 @@
 <?php
-include 'config/config.php';
+include '../config/config.php';
 $stories = fetchStories();
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ $stories = fetchStories();
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding-top:0;">
         <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"class="container-fluid">
-        <img style="width:68px;height:68px;"class=navbar-brand src="image\Blue Wood (2).png">
+        <img style="width:68px;height:68px;"class=navbar-brand src="../image/Blue Wood (2).png">
         <form class="d-flex navbar-search" method="GET" action="../search.php">
             <input name="query" style="border-radius:15px;box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" id="search" type="submit">
@@ -45,11 +45,11 @@ $stories = fetchStories();
                 // Display fetched stories
                 foreach ($stories as $story) {
                     echo '<div class="col" style="margin-bottom:30px;">';
-                    echo '<a href="./read/storyread.php?id=' . $story["id"] . '" class="card-link">';
+                    echo '<a href="../read/story.reader.php?id=' . $story["id"] . '" class="card-link">';
                     echo '<div class="story card">';
                     echo '<div class="card-body" >';
                     echo '<h5 class="card-title">' . $story["title"] . '</h5>';
-                    echo '<img src="image\book_3145755.png" style="display: block; margin: auto;width:72px;height:72px;margin-top:70px;">';
+                    echo '<img src="../image/book_3145755.png" style="display: block; margin: auto;width:72px;height:72px;margin-top:70px;">';
                     echo '<h6 class="card-subtitle mb-2 text-muted" style="text-align:center;position: absolute; bottom: 10px; left: 10px; right: 10px;">Author: ' . $story["author"] . '</h6>';
                     echo '</div>'; // close card-body
                     echo '</div>'; // close card
