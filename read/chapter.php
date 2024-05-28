@@ -16,37 +16,69 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ambil data yang dikirimkan melalui form
-    $user_id = $_POST['user_id'];
-    $comment_text = $conn->real_escape_string($_POST['comment_text']);
-    $chapter_id = $_POST['chapter_id']; // Ambil id bab dari form
+    if (isset($_POST['toggle_like'])) {
+        $user_id = $_POST['user_id'];
+        $chapter_id = $_POST['chapter_id'];
 
-    // Pertanyaan untuk menambahkan komentar ke database
-    $sql = "INSERT INTO comments (user_id, comment_text, chapter_id) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+        // Check if the user has already liked the chapter
+        $sql_check_like = "SELECT * FROM chapter_likes WHERE user_id = ? AND chapter_id = ?";
+        $stmt_check_like = $conn->prepare($sql_check_like);
+        $stmt_check_like->bind_param("ii", $user_id, $chapter_id);
+        $stmt_check_like->execute();
+        $result_check_like = $stmt_check_like->get_result();
 
-    // Mencegah SQL injection dengan mengikat parameter
-    $stmt->bind_param("isi", $user_id, $comment_text, $chapter_id);
-    
-    if ($stmt->execute()) {
-        echo "Komentar baru berhasil ditambahkan";
+        if ($result_check_like->num_rows > 0) {
+            // User has already liked the chapter, so unlike it
+            $sql_unlike = "DELETE FROM chapter_likes WHERE user_id = ? AND chapter_id = ?";
+            $stmt_unlike = $conn->prepare($sql_unlike);
+            $stmt_unlike->bind_param("ii", $user_id, $chapter_id);
+            $stmt_unlike->execute();
+            $stmt_unlike->close();
+        } else {
+            // User has not liked the chapter yet, so like it
+            $sql_like = "INSERT INTO chapter_likes (user_id, chapter_id) VALUES (?, ?)";
+            $stmt_like = $conn->prepare($sql_like);
+            $stmt_like->bind_param("ii", $user_id, $chapter_id);
+            $stmt_like->execute();
+            $stmt_like->close();
+        }
+        
+        $stmt_check_like->close();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Ambil data yang dikirimkan melalui form
+        $user_id = $_POST['user_id'];
+        $comment_text = $conn->real_escape_string($_POST['comment_text']);
+        $chapter_id = $_POST['chapter_id']; // Ambil id bab dari form
+
+        // Pertanyaan untuk menambahkan komentar ke database
+        $sql = "INSERT INTO comments (user_id, comment_text, chapter_id) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        // Mencegah SQL injection dengan mengikat parameter
+        $stmt->bind_param("isi", $user_id, $comment_text, $chapter_id);
+
+        if ($stmt->execute()) {
+            echo "Komentar baru berhasil ditambahkan";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $stmt->close();
+
+        // Arahkan kembali ke halaman bab setelah menambahkan komentar
+        header("Location: chapter.php?chapter_id=" . $chapter_id);
+        exit();
     }
-
-    $stmt->close();
-
-    // Arahkan kembali ke halaman bab setelah menambahkan komentar
-    header("Location: chapter.php?chapter_id=" . $chapter_id);
-    exit();
 }
 
 // Pertanyaan untuk mengambil judul dan konten bab
-$sql = "SELECT chapter_title, chapter_content FROM chapters WHERE id = ?"; 
+$sql = "SELECT chapter_title, chapter_content,
+        (SELECT COUNT(*) FROM chapter_likes WHERE chapter_likes.chapter_id = chapters.id) AS like_count
+        FROM chapters WHERE id = ?";
 $stmt = $conn->prepare($sql);
 
 // Mencegah SQL injection dengan mengikat parameter
-$stmt->bind_param("i", $_GET['chapter_id']); 
+$stmt->bind_param("i", $_GET['chapter_id']);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -58,7 +90,112 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konten Bab</title>
     <style>
-        /* Gaya CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            margin: 20px 0;
+            box-sizing: border-box;
+        }
+        .container h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .container p {
+            color: #555;
+            line-height: 1.6;
+        }
+        .like-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .like-button form {
+            display: inline;
+        }
+        .like-button button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .like-button button:hover {
+            background-color: #0069d9;
+        }
+        .like-button span {
+            color: #555;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        .comment-form, .comments {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            margin: 20px 0;
+            box-sizing: border-box;
+        }
+        .comment-form h2, .comments h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+        .comment-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+        .comment-form button:hover {
+            background-color: #45a049;
+        }
+        .comment {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .comment strong {
+            color: #333;
+        }
+        .comment small {
+            color: #888;
+        }
     </style>
 </head>
 <body>
@@ -66,8 +203,25 @@ $result = $stmt->get_result();
         <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                // Check if the user has liked the chapter
+                $sql_check_like = "SELECT * FROM chapter_likes WHERE user_id = ? AND chapter_id = ?";
+                $stmt_check_like = $conn->prepare($sql_check_like);
+                $stmt_check_like->bind_param("ii", $_SESSION['user_id'], $_GET['chapter_id']);
+                $stmt_check_like->execute();
+                $result_check_like = $stmt_check_like->get_result();
+                $liked = $result_check_like->num_rows > 0;
+                $stmt_check_like->close();
+
                 echo "<h2>" . htmlspecialchars($row['chapter_title'], ENT_QUOTES, 'UTF-8') . "</h2>";
                 echo "<p>" . nl2br(htmlspecialchars($row['chapter_content'], ENT_QUOTES, 'UTF-8')) . "</p>";
+                echo "<div class='like-button'>";
+                echo "<form method='POST' action=''>";
+                echo "<input type='hidden' name='user_id' value='" . $_SESSION['user_id'] . "'>";
+                echo "<input type='hidden' name='chapter_id' value='" . $_GET['chapter_id'] . "'>";
+                echo "<button type='submit' name='toggle_like'>" . ($liked ? "Unlike" : "Like") . "</button>";
+                echo "<span>Likes: " . $row['like_count'] . "</span>";
+                echo "</form>";
+                echo "</div>";
             }
         } else {
             echo "<p>Bab tidak ditemukan.</p>";

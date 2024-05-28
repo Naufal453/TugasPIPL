@@ -13,7 +13,7 @@ include '../config/config.php'
 <div class="container">
     <div class="sidebar">
         <ul>
-            <a href="../home.php">Kembali ke Home</a>
+            <a href="../home.writer.php">Kembali ke Home</a>
             <br>
             <br>
             <li><?php include './include/sidebar.php'?></li>

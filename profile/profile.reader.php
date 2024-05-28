@@ -37,7 +37,7 @@
 <header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="background-color: #135D66;padding-top:0;padding-left:0px;padding-right:0px;">
         <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"class="container-fluid">
-            <img style="width:68px;height:68px;"class=navbar-brand src="../image/Blue Wood (2).png">
+            <img style="width:68px;height:68px;"class=navbar-brand src="../image/Blue Wood (2).png" href="../reader">
                 <ul class="navbar-nav ms-auto"> <!-- Adjusted to mx-auto -->
                     <li class="nav-item">
                         <a class="nav-link"  href="../homereader.php">

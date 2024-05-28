@@ -3,7 +3,7 @@ session_start();
 
 function checkLoggedIn(){
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: ../Home/choose.php");
+        header("Location: ../Tugaspipl/as");
         exit;
     }
 
@@ -81,7 +81,7 @@ function deleteStory($story_id) {
     // Check if story ID is provided
     if (empty($story_id)) {
         // Redirect to dashboard or appropriate page
-        header("Location: ../write/index.php");
+        header("Location: ../write");
         exit;
     }
 

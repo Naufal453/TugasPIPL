@@ -18,12 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Username atau email sudah digunakan
         $error_message = "Username atau email sudah digunakan!";
     } else {
-        // Tambahkan user baru ke database dengan peran penulis
+        // Tambahkan user baru ke database dengan peran pembaca
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $insert_query = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$hashed_password', 'writer')";
+        $insert_query = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$hashed_password', 'reader')";
         mysqli_query($db, $insert_query);
         $_SESSION['username'] = $username;
-        header("Location: ./login.php");
+        header("Location: ./login.reader.php");
         exit();
     }
 }
@@ -39,33 +39,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Inria+Serif&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="http://localhost/Tugaspipl/Home/Login/style/register.css">
+<link rel="stylesheet" href="http://localhost/Tugaspipl/Login/style/register.css">
 <style>
 
 </style>
 </head>
 <body>
-<form action="register.php" method="post">
+<form action="register.reader.php" method="post">
     <div class=e5_2>
-        <div  class="e5_3"></div>
-        <span  class="e13_18">Email</span>
-        <span  class="e5_5">Welcome to A3!</span>
+        <div class="e5_3"></div>
+        <span class="e13_18">Email</span>
+        <span class="e5_5">Welcome to A3!</span>
         <input type="text" id="username" name="username" required class="e13_12"></input>
         <input type="email" id="email" name="email" required class="e5_6"></input>
         <input type="password" id="password" name="password" required class="e5_7"></input>
         <button type="submit" class="e5_8">Sign Up</button>
-        <span  class="e5_10">Username</span>
-        <span  class="e5_11">Password</span>
-        <div  class="e42_189"></div>
-        <span  class="e47_211">Register your account as a writer!</span>
-        <span  class="e50_305">Alternate Arc Archive</span>
+        <span class="e5_10">Username</span>
+        <span class="e5_11">Password</span>
+        <div class="e42_189"></div>
+        <span class="e47_211">Register your account ! !</span>
+        <span class="e50_305">Alternate Arc Archive</span>
         <br>
-            <a href="http://localhost/Tugaspipl/Home/choose.php" style="position:absolute;margin-left:70px;margin-top:550px;font-size:20px;">back</a>
+            <a href="http://localhost/Tugaspipl/as" style="position:absolute;margin-left:70px;margin-top:550px;font-size:20px;">back</a>
     </div>
 </form>
 
 <?php if(isset($error_message)) { ?>
     <p><?php echo $error_message; ?></p>
 <?php } ?>
+</div>
+</div>
 </body>
 </html>

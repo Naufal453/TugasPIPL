@@ -3,7 +3,7 @@
             <img style="width:68px;height:68px;"class=navbar-brand src="../image/Blue Wood (2).png">
                 <ul class="navbar-nav ms-auto"> <!-- Adjusted to mx-auto -->
                     <li class="nav-item">
-                        <a class="nav-link"  href="../home.php">
+                        <a class="nav-link"  href="../writer">
                             <img style="width:36px;height:36px;" src="../image/icons8-home-480.png" href="#">
                         </a>
                     </li>
@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="" href="../profile/profileset.php">
+                        <a class="nav-link" style="" href="../profile/profile.writer.php">
                             <img style="width:36px;height:36px;" src="../image/user_1077012.png" >
                         </a>
                     </li>

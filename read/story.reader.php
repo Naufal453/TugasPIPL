@@ -14,7 +14,7 @@ include '../config/config.php'
         <div class="container">
             <div class="sidebar">
                 <ul>
-                    <a href="../homereader.php">Kembail ke Home</a>
+                    <a href="../home.reader.php">Kembail ke Home</a>
                     <br>
                     <br>
                     <li><?php include './include/sidebar.php'?></li>
@@ -27,14 +27,5 @@ include '../config/config.php'
                 </ul>
             </div>
         </div>
-            
-            
-                <!-- <div class="buttons">
-                    <button class="vote-button"><img src="asset/vote button.svg" alt="vote-button"></button>
-                    <button class="comment-button"><img src="asset/comment button.svg" alt="comment-button"></button>
-                    <button class="prev-button"><img src="asset/previous chapter button.svg" alt="prev-button"></button>
-                    <button class="next-button"><img src="asset/next chapter button.svg" alt="next-button"></button>
-                </div> -->
-
 </body>
 </html>
