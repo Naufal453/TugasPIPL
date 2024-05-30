@@ -6,7 +6,6 @@ function checkLoggedIn(){
         header("Location: ../Tugaspipl/as");
         exit;
     }
-
 }
 
 function connectDatabase(){
@@ -20,7 +19,7 @@ function connectDatabase(){
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-     return $conn;
+    return $conn;
 }
 
 function fetchStories(){
@@ -29,67 +28,51 @@ function fetchStories(){
     $sql = "SELECT Addtags, id, title, author, description FROM stories";
     $result = $conn->query($sql);
 
-    
     $stories = [];
     if ($result->num_rows > 0) {
-        
         while ($row = $result->fetch_assoc()) {
             $stories[] = $row;
         }
     }
 
-
     $conn->close();
     return $stories;
 }
-function searchStories($search_query) {
-    // Check if user is logged in
-    checkLoggedIn();
 
-    // Establish database connection
+function searchStories($search_query) {
+    checkLoggedIn();
     $conn = connectDatabase();
 
-    // Execute query to fetch data
     $sql = "SELECT id, title, author, description FROM stories WHERE title LIKE '%$search_query%' OR author LIKE '%$search_query%'";
     $result = $conn->query($sql);
 
-    // Check if there are any matching stories
     if ($result === false) {
         echo "Error executing query: " . $conn->error;
     } else {
         $stories = [];
         if ($result->num_rows > 0) {
-            // Fetch data and store in an array
             while ($row = $result->fetch_assoc()) {
                 $stories[] = $row;
             }
         }
 
-        // Close database connection
         $conn->close();
-
         return $stories;
     }
 }
-function deleteStory($story_id) {
-    // Check if user is logged in
-    checkLoggedIn();
 
-    // Establish database connection
+function deleteStory($story_id) {
+    checkLoggedIn();
     $conn = connectDatabase();
 
-    // Check if story ID is provided
     if (empty($story_id)) {
-        // Redirect to dashboard or appropriate page
         header("Location: ../write");
         exit;
     }
 
-    // Begin transaction
     $conn->begin_transaction();
 
     try {
-        // Get the chapter IDs related to the story
         $get_chapters_sql = "SELECT id FROM chapters WHERE story_id = ?";
         $get_chapters_stmt = $conn->prepare($get_chapters_sql);
         $get_chapters_stmt->bind_param("i", $story_id);
@@ -98,7 +81,6 @@ function deleteStory($story_id) {
         $chapter_ids = $result->fetch_all(MYSQLI_ASSOC);
         $get_chapters_stmt->close();
 
-        // Delete related rows in chapter_likes for each chapter
         foreach ($chapter_ids as $chapter) {
             $chapter_id = $chapter['id'];
             $delete_likes_sql = "DELETE FROM chapter_likes WHERE chapter_id = ?";
@@ -108,14 +90,12 @@ function deleteStory($story_id) {
             $delete_likes_stmt->close();
         }
 
-        // Delete the chapters associated with the story
         $delete_chapters_sql = "DELETE FROM chapters WHERE story_id = ?";
         $delete_chapters_stmt = $conn->prepare($delete_chapters_sql);
         $delete_chapters_stmt->bind_param("i", $story_id);
         $delete_chapters_stmt->execute();
         $delete_chapters_stmt->close();
 
-        // Delete the story
         $author = $_SESSION['username'];
         $sql = "DELETE FROM stories WHERE id = ? AND author = ?";
         $stmt = $conn->prepare($sql);
@@ -123,20 +103,37 @@ function deleteStory($story_id) {
         $stmt->execute();
         $stmt->close();
 
-        // Commit transaction
         $conn->commit();
 
     } catch (Exception $e) {
-        // Rollback transaction if there's an error
         $conn->rollback();
         throw $e;
     }
 
-    // Close connection
     $conn->close();
-
-    // Redirect to writer dashboard or appropriate page
     header("Location: index.php");
     exit;
+}
+
+function reportComment($comment_id) {
+    checkLoggedIn();
+    $conn = connectDatabase();
+
+    if (empty($comment_id) || !is_numeric($comment_id)) {
+        die("ID komentar tidak valid.");
+    }
+
+    $sql_report = "INSERT INTO reports (comment_id, report_date) VALUES (?, NOW())";
+    $stmt_report = $conn->prepare($sql_report);
+    $stmt_report->bind_param("i", $comment_id);
+
+    if ($stmt_report->execute()) {
+        echo "Komentar berhasil dilaporkan.";
+    } else {
+        echo "Terjadi kesalahan saat melaporkan komentar.";
+    }
+
+    $stmt_report->close();
+    $conn->close();
 }
 ?>

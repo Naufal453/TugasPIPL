@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "<p class='text-success'>Chapter added successfully.</p>";
-        header("Location: /Tugaspipl/Home/write/");
+        header("Location: /Tugaspipl/write/");
     } else {
         echo "<p class='text-danger'>Error: " . $sql . "<br>" . $conn->error . "</p>";
     }
