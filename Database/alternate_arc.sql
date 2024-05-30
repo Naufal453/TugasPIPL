@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2024 at 07:38 PM
+-- Generation Time: May 30, 2024 at 04:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,9 +40,27 @@ CREATE TABLE `chapters` (
 --
 
 INSERT INTO `chapters` (`id`, `story_id`, `chapter_title`, `chapter_content`, `created_at`) VALUES
-(9, 24, 'tes', 'tes', '2024-05-15 06:54:16'),
-(10, 24, '321', '321', '2024-05-15 17:19:46'),
-(11, 25, 'tessssssssssssss', 'tessssssssssssss', '2024-05-15 17:20:21');
+(14, 27, 'testes', 'testes', '2024-05-29 05:21:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chapter_likes`
+--
+
+CREATE TABLE `chapter_likes` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `chapter_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chapter_likes`
+--
+
+INSERT INTO `chapter_likes` (`id`, `user_id`, `chapter_id`, `created_at`) VALUES
+(42, 31, 14, '2024-05-29 16:51:14');
 
 -- --------------------------------------------------------
 
@@ -63,7 +81,21 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `user_id`, `comment_text`, `created_at`, `chapter_id`) VALUES
-(17, 31, 'HALO', '2024-05-15 17:36:44', 10);
+(24, 31, 'tesssssssss', '2024-05-29 05:21:55', 14),
+(25, 31, 'tes', '2024-05-29 16:22:33', 14),
+(26, 31, 'tes', '2024-05-29 16:51:18', 14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `comment_id` int(11) NOT NULL,
+  `report_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -104,8 +136,7 @@ INSERT INTO `stories` (`id`, `title`, `author`, `description`, `user_id`, `image
 (10, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (17, 'tes', 'nopal1234', 'Semerbak durian memenuhi rongga hidung. Siapa pun yang iseng lewat di depan pondok bambu dengan bayang (kursi dari bambu) panjang ini dipastikan menoleh, tercuri perhatiannya. Buah durian kedua yang dibelah bapak selepas turun dari mobil. Harganya murah saja, tiga puluh ribu ukuran sedang. Ayolah, siapa yang dengan senang hati mau melewatkan kenikmatan buah yang disebut king of fruit itu? Sebegitu lahapnya bapak mencomot durian di tengah obrolan ringannya dengan si penjual. Sensasi lembut nan tebal daging buah dengan biji kecil dan warna sempurna kuning cerah menjadi primadona. Ya…seperti kataku di awal, jangan lupakan bau kenikmatan surga dunia yang tumbuh dari sebatang pohon. Jemariku ikut meraba segumpal buah kaya rasa, tetapi bukan sensasi kenikmatan manis yang kukejar dalam setiap gigitan buahnya. Sungguh, jauh dari segala hal tentang buah. Sedikit menggelitik memang, bagaimana mungkin benakku seketika aktif berkelana membuka file ingatan lama ketika bapak sedang terbuai meminum air dengan cawan kulit durian. File tentang rentang nyawa yang diberikan kepada hati milikku, denyut nadi berisi kekaguman kepada seorang pria jangkung dengan senyum rupawan yang menurut versiku mampu mengalahkan semua total kemanisan buah durian yang menggantung di desa kaki gunung ini. Apakah dari kalian ada yang pernah terpikir tentang sensasi itu? Pikiranku tenggelam dalam setiap larutan memori tanpa diminta. Mengulang gemeletuk sepatu dan ingar-bingar tahun-tahun perkuliahan. “Aku tidak bisa', NULL, NULL, '', '', '', '', '', '', ''),
 (20, 'tes', 'reader', 'ts', NULL, NULL, 'tes', 'tes', 'te', 'tes', 'tes', 'tes', 'adventure, romance'),
-(24, 'tes', 'writer', 'tes', NULL, NULL, 'tes', 'tes', 'tes', 'tes', 'tes', 'tes', 'adventure, tes'),
-(25, 'tessssssssssssss', 'writer', 'tessssssssssssss', NULL, NULL, 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'tessssssssssssss', 'adventure');
+(27, 'testestes', 'writer', 'testestes', NULL, NULL, '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -151,7 +182,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `updat
 (29, 'writer43', 'writer431@gmail.com', '$2y$10$eaRxGyalDbY4e6vo4ukLXOqdXp.WpdC4M5zodQ0ePpG30G6qNoQve', '2024-04-23 05:09:01', '2024-04-23 05:09:01', 'reader'),
 (30, 'nopal1234', 'nopal1234@gmail.com', '$2y$10$.OrQAbbnJoNMNV6mZRFMFOJsAlkVWfuZnnx8BLNc02iv8Lf7Ptx1e', '2024-04-23 06:20:43', '2024-04-23 06:20:43', 'writer'),
 (31, 'writer', 'writer@gmail.com', '$2y$10$xDcH69QyY6MYoiiMoaNFbOwqFYDKUjspWR4x7SWtWHhGsOCV7gIyC', '2024-05-07 03:41:11', '2024-05-07 03:41:11', 'writer'),
-(32, 'reader', 'reader@gmail.com', '$2y$10$V.XeW0q.uicyhCFtDIIz2u0qEbaw.D0kAG.Giwvs9ltzD1jzqSIJC', '2024-05-07 08:43:57', '2024-05-07 08:43:57', 'reader');
+(32, 'reader', 'reader@gmail.com', '$2y$10$V.XeW0q.uicyhCFtDIIz2u0qEbaw.D0kAG.Giwvs9ltzD1jzqSIJC', '2024-05-07 08:43:57', '2024-05-07 08:43:57', 'reader'),
+(99, 'admin', 'admin@gmail.com', '$2y$10$IHywfaaW3qIUEylqDmdrGeAnd.YD5S6NFelF40XN9e9DiFuAGWwzW', '2024-05-28 17:00:00', '2024-05-29 05:46:09', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -165,12 +197,27 @@ ALTER TABLE `chapters`
   ADD KEY `story_id` (`story_id`);
 
 --
+-- Indexes for table `chapter_likes`
+--
+ALTER TABLE `chapter_likes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`,`chapter_id`),
+  ADD KEY `chapter_id` (`chapter_id`);
+
+--
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `fk_comments_chapters` (`chapter_id`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comment_id` (`comment_id`);
 
 --
 -- Indexes for table `stories`
@@ -194,25 +241,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chapters`
 --
 ALTER TABLE `chapters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `chapter_likes`
+--
+ALTER TABLE `chapter_likes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- Constraints for dumped tables
@@ -225,11 +284,24 @@ ALTER TABLE `chapters`
   ADD CONSTRAINT `chapters_ibfk_1` FOREIGN KEY (`story_id`) REFERENCES `stories` (`id`);
 
 --
+-- Constraints for table `chapter_likes`
+--
+ALTER TABLE `chapter_likes`
+  ADD CONSTRAINT `chapter_likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `chapter_likes_ibfk_2` FOREIGN KEY (`chapter_id`) REFERENCES `chapters` (`id`);
+
+--
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_comments_chapters` FOREIGN KEY (`chapter_id`) REFERENCES `chapters` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
