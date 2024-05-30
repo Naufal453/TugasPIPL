@@ -234,6 +234,7 @@ $result = $stmt->get_result();
     <div class="comments">
         <h2>Komentar</h2>
         <?php
+        require 'report.php';
         // Ambil dan tampilkan komentar
         $sql_comments = "SELECT comments.comment_text, users.username, comments.created_at
                          FROM comments 
@@ -250,7 +251,10 @@ $result = $stmt->get_result();
                 echo "<div class='comment'>";
                 echo "<strong>" . htmlspecialchars($row_comments['username']) . ":</strong> " . htmlspecialchars($row_comments['comment_text']) . "<br>";
                 echo "<small>Diposting pada: " . htmlspecialchars($row_comments['created_at']) . "</small>";
+                echo "<br>";
+                echo "<button style='background-color:red;' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>" . "Report" ."</button>";
                 echo "</div>";
+                
             }
         } else {
             echo "Belum ada komentar.";
