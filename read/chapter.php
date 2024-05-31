@@ -234,12 +234,10 @@ $result = $stmt->get_result();
     <div class="comments">
         <h2>Komentar</h2>
         <?php
-        require 'report.php';
-        // Ambil dan tampilkan komentar
-        $sql_comments = "SELECT comments.comment_text, users.username, comments.created_at
+        $sql_comments = "SELECT comments.id, comments.comment_text, users.username, comments.created_at
                          FROM comments 
                          JOIN users ON comments.user_id = users.id 
-                         WHERE comments.chapter_id = ?  -- Tambahkan kondisi untuk hanya mengambil komentar pada bab yang sama
+                         WHERE comments.chapter_id = ?
                          ORDER BY comments.created_at DESC";
         $stmt_comments = $conn->prepare($sql_comments);
         $stmt_comments->bind_param("i", $_GET['chapter_id']);
@@ -251,10 +249,8 @@ $result = $stmt->get_result();
                 echo "<div class='comment'>";
                 echo "<strong>" . htmlspecialchars($row_comments['username']) . ":</strong> " . htmlspecialchars($row_comments['comment_text']) . "<br>";
                 echo "<small>Diposting pada: " . htmlspecialchars($row_comments['created_at']) . "</small>";
-                echo "<br>";
-                echo "<button style='background-color:red;' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>" . "Report" ."</button>";
+                echo "<button type='button' onclick='openModal(\"" . $row_comments['id'] . "\")' style='background-color:red;'>Report</button>";
                 echo "</div>";
-                
             }
         } else {
             echo "Belum ada komentar.";
@@ -262,6 +258,108 @@ $result = $stmt->get_result();
         $stmt_comments->close();
         ?>
     </div>
+
+    <!-- Report Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="report.php?chapter_id=<?php echo $_GET['chapter_id']; ?>" method="POST">
+                <input type="hidden" name="chapter_id" value="<?php echo $_GET['chapter_id']; ?>">
+                <input type="hidden" name="comment_id" id="commentId" value="">
+                <h2>Report Comment</h2>
+                <textarea name="report_reason" placeholder="Enter reason for reporting" required></textarea>
+                <button type="submit" name="report_comment">Submit Report</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Notification Modal -->
+    <div id="successModal" class="modal" style="<?php echo isset($_GET['report_success']) ? 'display:block;' : 'display:none;'; ?>">
+        <div class="modal-content">
+            <span class="close" onclick="closeSuccessModal()">&times;</span>
+            <p>Report submitted successfully!</p>
+        </div>
+    </div>
+
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('reportModal');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal 
+        function openModal(commentId) {
+            document.getElementById('commentId').value = commentId;
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Get the success modal
+        var successModal = document.getElementById('successModal');
+
+        // Get the <span> element that closes the success modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Function to close the success modal
+        function closeSuccessModal() {
+            successModal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == successModal) {
+                successModal.style.display = "none";
+            }
+        }
+    </script>
 
     <?php $conn->close(); ?>
 </body>

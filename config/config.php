@@ -3,7 +3,7 @@ session_start();
 
 function checkLoggedIn(){
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: ../Tugaspipl/as");
+        header("Location: ../Tugaspipl/Login/login.php");
         exit;
     }
 }

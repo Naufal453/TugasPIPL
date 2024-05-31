@@ -1,27 +1,37 @@
+<?php
+require_once '../config/config.php';
+$conn = connectDatabase();
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<!-- Button trigger modal -->
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['report_comment'])) {
+    $comment_id = $_POST['comment_id'];
+    $report_reason = $conn->real_escape_string($_POST['report_reason']); // Sanitize the input
+    $chapter_id = isset($_POST['chapter_id']) ? $_POST['chapter_id'] : (isset($_GET['chapter_id']) ? $_GET['chapter_id'] : null);
 
+    if ($chapter_id === null) {
+        echo "Error: Chapter ID is missing in the URL.";
+        exit();
+    }
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="modal-body">
-                <input type="text" placeholder="your report">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Send</button>
-            </div>
+    // SQL to insert report into the database
+    $sql = "INSERT INTO reports (comment_id, reason) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("is", $comment_id, $report_reason);
 
-        </form>  
-    </div>
-  </div>
-</div>
+    try {
+        if ($stmt->execute()) {
+            // Redirect with success message
+            header("Location: chapter.php?chapter_id=" . $chapter_id);
+            exit(); // Make sure to exit after redirecting
+        } else {
+            echo "Error submitting report: " . $stmt->error;
+        }
+    } catch (mysqli_sql_exception $e) {
+        echo "Error submitting report: " . $e->getMessage();
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
+?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
