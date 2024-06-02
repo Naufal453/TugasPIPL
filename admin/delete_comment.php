@@ -18,7 +18,7 @@ if (isset($_GET['comment_id'])) {
     $stmt_delete_comment->bind_param("i", $comment_id);
     if ($stmt_delete_comment->execute()) {
         // Redirect back to the dashboard with a success message
-        header("Location: index.php?delete_success=1");
+        header("Location: index.php");
     } else {
         echo "Error deleting comment: " . $conn->error;
     }
@@ -28,5 +28,5 @@ if (isset($_GET['comment_id'])) {
 }
 
 $conn->close();
-?>
 
+?>

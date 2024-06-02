@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style/style.css">
 </head>
+
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow">
@@ -16,10 +18,12 @@
             <p class="text-center">Login</p>
             <ul class="nav nav-tabs justify-content-center" id="loginTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="writer-tab" data-toggle="tab" href="#writer" role="tab" aria-controls="writer" aria-selected="true">Writer</a>
+                    <a class="nav-link active" id="writer-tab" data-toggle="tab" href="#writer" role="tab"
+                        aria-controls="writer" aria-selected="true">Writer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="reader-tab" data-toggle="tab" href="#reader" role="tab" aria-controls="reader" aria-selected="false">Reader</a>
+                    <a class="nav-link" id="reader-tab" data-toggle="tab" href="#reader" role="tab"
+                        aria-controls="reader" aria-selected="false">Reader</a>
                 </li>
             </ul>
             <div class="tab-content" id="loginTabContent">
@@ -50,7 +54,13 @@
             </div>
             <br>
             <a href="register.php">You don't have an account yet?</a>
-            <a href="#" class="text-center d-block mt-3">login as admin</a>
+            <br>
+            <form action="login.admin.php">
+                <button type="submit" class="btn btn-primary">
+                    Login as admin
+                </button>
+            </form>
+
         </div>
     </div>
 
@@ -59,6 +69,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
 
 <?php

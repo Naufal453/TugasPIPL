@@ -1,28 +1,28 @@
 <?php
 session_start();
 
-// Koneksi ke database
+// Database Connection
 $db = mysqli_connect("localhost", "root", "", "alternate_arc");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Mendapatkan data dari formulir
+    // Fetching data from the form
     $username = mysqli_real_escape_string($db, $_POST['username']);
     $password = mysqli_real_escape_string($db, $_POST['password']);
 
-    // Mencari user di database
+    // Searching for user in the database
     $query = "SELECT * FROM users WHERE username = '$username'";
     $result = mysqli_query($db, $query);
 
-    // Mengecek apakah user ditemukan
+    // Checking if user is found
     if (mysqli_num_rows($result) === 1) {
-        // User ditemukan
+        // User found
         $user = mysqli_fetch_assoc($result);
 
-        // Verifikasi password
+        // Verifying password
         if (password_verify($password, $user['password'])) {
-            // Mengecek peran pengguna
+            // Checking user role
             if ($user['role'] === 'admin') {
-                // Login berhasil
+                // Successful login
                 $_SESSION['loggedin'] = true;
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
@@ -30,47 +30,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: ../admin");
                 exit();
             } else {
-                // Pengguna bukan penulis
-                echo "Anda tidak memiliki izin untuk mengakses halaman ini.";
+                // User is not an admin
+                echo '<div class="alert alert-danger" role="alert">You don\'t have permission to access this page.</div>';
             }
         } else {
-            // Password salah
-            echo "Password salah!";
+            // Incorrect password
+            echo '<div class="alert alert-danger" role="alert">Incorrect password!</div>';
         }
     } else {
-        // User tidak ditemukan
-        echo "Username tidak ditemukan!";
+        // User not found
+        echo '<div class="alert alert-danger" role="alert">Username not found!</div>';
     }
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="http://localhost/Tugaspipl/Login/style/login.css">
+    <title>Alternate Arc Archive - Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
 <body>
-    <form action="login.admin.php" method="post">
-        <div class="e13_2">
-            <div class="e13_3">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4 shadow">
+            <h1 class="text-center">Welcome to A3</h1>
+            <p class="text-center">Admin</p>
+            <div class="tab-content" id="loginTabContent">
+                <div class="tab-pane fade show active" id="writer" role="tabpanel" aria-labelledby="writer-tab">
+                    <form id="writer-form" class="mt-3" action="login.admin.php" method="post">
+                        <input type="hidden" name="role" value="writer">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        <br>
+                        <a href="login.php"><- Back</a>
+                    </form>
+                </div>
             </div>
-            <span class="e13_4">Alternate Arc Archive</span>
-            <span class="e13_5">Login</span>
-            <input type="text" id="username" name="username" required="" class="e13_6">
-            <input type="password" id="password" name="password" required="" class="e13_7">
-            <button type="submit" class="e13_8">Sign In</button>
-            <span class="e13_10">Username</span>
-            <span class="e13_11">Password</span>
-            <div class="e50_306"></div>
-            <br>
-            <a href="http://localhost/Tugaspipl/as" style="position:absolute;margin-left:70px;margin-top:550px;font-size:20px;">back</a>
         </div>
-        <br>
-    </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
