@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2024 at 11:13 AM
+-- Generation Time: Jun 04, 2024 at 11:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `chapters` (
 --
 
 INSERT INTO `chapters` (`id`, `story_id`, `chapter_title`, `chapter_content`, `created_at`) VALUES
-(15, 28, 'tes', 'tes', '2024-06-02 08:50:27');
+(16, 37, 'testes', 'tes', '2024-06-04 09:31:31');
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE `chapter_likes` (
 --
 
 INSERT INTO `chapter_likes` (`id`, `user_id`, `chapter_id`, `created_at`) VALUES
-(101, 31, 15, '2024-06-02 08:50:30');
+(107, 31, 16, '2024-06-04 09:32:20');
 
 -- --------------------------------------------------------
 
@@ -124,19 +124,8 @@ CREATE TABLE `stories` (
 --
 
 INSERT INTO `stories` (`id`, `title`, `author`, `description`, `user_id`, `image_path`, `Fandom`, `Language`, `Status`, `Series`, `Characters`, `Relationship`, `Addtags`) VALUES
-(1, 'Revenant', 'Kim Eun Hee', 'Revenant tells the story of Ku San Young who is possessed by a demon after a door from another world opens. Ku San Young will team up with Yeom Hae Sang who can see the demon inside her body. They will find out behind mysterious deaths related to sacred objects.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Twilight', 'Melissa', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'Ultraman', 'Nopal', 'Giant of light', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'Ultraman', 'Nopal', 'Giant of light', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 'Godzilla', 'Gopal', 'Giant lizard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 'tes123', 'Gopal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 'tesssssssssssss', 'Gopal', 'wewe', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 'tes', 'Fawwazalamsyahnaufal', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 'tes', 'nopal1234', 'Semerbak durian memenuhi rongga hidung. Siapa pun yang iseng lewat di depan pondok bambu dengan bayang (kursi dari bambu) panjang ini dipastikan menoleh, tercuri perhatiannya. Buah durian kedua yang dibelah bapak selepas turun dari mobil. Harganya murah saja, tiga puluh ribu ukuran sedang. Ayolah, siapa yang dengan senang hati mau melewatkan kenikmatan buah yang disebut king of fruit itu? Sebegitu lahapnya bapak mencomot durian di tengah obrolan ringannya dengan si penjual. Sensasi lembut nan tebal daging buah dengan biji kecil dan warna sempurna kuning cerah menjadi primadona. Ya…seperti kataku di awal, jangan lupakan bau kenikmatan surga dunia yang tumbuh dari sebatang pohon. Jemariku ikut meraba segumpal buah kaya rasa, tetapi bukan sensasi kenikmatan manis yang kukejar dalam setiap gigitan buahnya. Sungguh, jauh dari segala hal tentang buah. Sedikit menggelitik memang, bagaimana mungkin benakku seketika aktif berkelana membuka file ingatan lama ketika bapak sedang terbuai meminum air dengan cawan kulit durian. File tentang rentang nyawa yang diberikan kepada hati milikku, denyut nadi berisi kekaguman kepada seorang pria jangkung dengan senyum rupawan yang menurut versiku mampu mengalahkan semua total kemanisan buah durian yang menggantung di desa kaki gunung ini. Apakah dari kalian ada yang pernah terpikir tentang sensasi itu? Pikiranku tenggelam dalam setiap larutan memori tanpa diminta. Mengulang gemeletuk sepatu dan ingar-bingar tahun-tahun perkuliahan. “Aku tidak bisa', NULL, NULL, '', '', '', '', '', '', ''),
 (20, 'tes', 'reader', 'ts', NULL, NULL, 'tes', 'tes', 'te', 'tes', 'tes', 'tes', 'adventure, romance'),
-(28, 'tes', 'writer', 'tes', NULL, NULL, 'tes', 'tes', 'tes', 'tes', 'tes', 'tes', 'adventure, action, tes');
+(37, 'testes', 'writer', 'tes', NULL, 'uploads/register v3.png', 'testes', 'Japan', 'ts', '13', '12', 'broken home', 'rw, ancient');
 
 -- --------------------------------------------------------
 
@@ -243,31 +232,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chapters`
 --
 ALTER TABLE `chapters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `chapter_likes`
 --
 ALTER TABLE `chapter_likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users`
