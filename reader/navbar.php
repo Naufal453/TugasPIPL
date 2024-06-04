@@ -69,7 +69,7 @@ checkLoggedIn();
                     // Display user profile information from session
                     echo '<p class="mb-0"><strong>' . $_SESSION['username'] . '</strong></p>';
                     // echo '<p class="mb-0">' . $_SESSION['role'] . '</p>';
-                    echo '<a href="profile/profile.php">' . 'Profile Setting' . '</a>';
+                    echo '<a href="../profile/profile.php">' . 'Profile Setting' . '</a>';
                     echo '<a href="logout.php">' . 'Logout' . '</a>';
 
 

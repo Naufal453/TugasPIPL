@@ -56,22 +56,23 @@ checkLoggedIn();
 
     <!-- Fixed bar above navbar -->
     <div class="fixed-bar">
-        <nav class="navbar navbar-light " style="color:#496989;">
-            <a class="navbar-brand text-white" href="#">Alternate Arc Archive</a>
-            <form class="form-inline">
+        <nav class="navbar navbar-light d-flex" style="color:#496989;">
+            <a class="navbar-brand text-white p-2 flex-grow-1" href="#">Alternate Arc Archive</a>
+            <form class="form-inline p-2">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             </form>
-            <div class="profile-dropdown">
-                <img src="https://via.placeholder.com/40" class="rounded-circle" alt="User Avatar">
-                <div class="profile-dropdown-content p-3">
+
+            <div class="profile-dropdown p-2">
+                <img src="../image/user_1077012.png" style="max-width:32px;" class="rounded-circle" alt="User Avatar">
+                <div class="profile-dropdown-content p-3" style="border-radius:10px;min-width:128px;min-height:150px;">
                     <?php
 
                     // Display user profile information from session
-                    echo '<p class="mb-0"><strong>' . $_SESSION['username'] . '</strong></p>';
+                    echo '<h5 class="mb-0"><strong>' . $_SESSION['username'] . '</strong></h5>';
                     echo '<p class="mb-0"><strong>' . $_SESSION['email'] . '</strong></p>';
                     // echo '<p class="mb-0">' . $_SESSION['role'] . '</p>';
                     echo '<a href="../write/">' . 'Nulis' . '</a><br>';
-                    echo '<a href="profile/profile.php">' . 'Profile Setting' . '</a><br>';
+                    echo '<a href="../profile/profile.php">' . 'Profile Setting' . '</a><br>';
                     echo '<a href="logout.php">' . 'Logout' . '</a><br>';
 
 

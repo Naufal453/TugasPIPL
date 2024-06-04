@@ -107,7 +107,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Writer Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./style/input.css">
 </head>
 <header>
@@ -115,121 +116,157 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 
 <body style="background-color:#E3FEF7;">
-    <div class="container">
-        <h1 class="mt-5 mb-4">Writer Dashboard</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Database connection
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $database = "alternate_arc";
+    <div class="container mt-5 pt-3 ">
+        <hr>
+        <div class="d-flex mb-2">
+            <h1 class="me-auto p-2">Writer Dashboard</h1>
+            <button style="max-height: 40px;margin-top:25px;" type="button" class="btn btn-primary btn-danger p-2"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Tambah Story
+            </button>
+        </div>
 
-                // Establish connection
-                $conn = new mysqli($servername, $username, $password, $database);
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4  d-flex justify-content-around ">
 
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+            <?php
+            // Database connection
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $database = "alternate_arc";
+
+            // Establish connection
+            $conn = new mysqli($servername, $username, $password, $database);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // Fetch stories authored by the logged-in user
+            $author = $_SESSION['username'];
+            $sql = "SELECT id, author, image_path, title, description FROM stories WHERE author = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $author);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="card me-auto p-2" style="width: 18rem;background-color:#F1F1F1;" >';
+                    echo '<br>';
+                    echo '<img src="../write/' . $row["image_path"] . '" class="card-img-top" alt="...">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $row['title'] . '</h5>' . '<h7 style="font-style:italic;">' . '</h7> <br>';
+                    echo '<p class="card-text">' . substr($row["description"], 0, 50) . '...' . '</p>';
+                    echo '</div>';
+                    echo '<ul class="list-group list-group-flush">';
+                    echo '<div class="card-body">';
+                    echo '<a href="../read/story.writer.php?id=' . $row["id"] . '" class="card-link">' . 'Read More' . '</a>';
+                    echo "<a href='delete_story.php?id=" . $row['id'] . "' class='card-link'>Delete</a>";
+                    echo "<a href='edit_story.php?id=" . $row['id'] . "' class='card-link'>Delete</a>";
+                    echo "<a href='add_chapter.php?id=" . $row['id'] . "' class='card-link'>Delete</a>";
+                    echo '</div>';
+                    echo '</ul>';
+                    echo '</div>';
+                    // echo "<tr>";
+                    // echo "<td>" . $row['title'] . "</td>";
+                    // echo "<td>
+                    //             <a href='edit_story.php?id=" . $row['id'] . "'>Edit</a> | 
+                    //             <a href='delete_story.php?id=" . $row['id'] . "'>Delete</a> |
+                    //             <a href='../read/story.writer.php?id=" . $row['id'] . "'>Review</a> |
+                    //             <a href='add_chapter.php?id=" . $row['id'] . "'>Add Chapter</a>
+                    //           </td>";
+                    // echo "</tr>";
                 }
+            } else {
+                echo "<tr><td colspan='3'>No stories found.</td></tr>";
+            }
 
-                // Fetch stories authored by the logged-in user
-                $author = $_SESSION['username'];
-                $sql = "SELECT id, title, description FROM stories WHERE author = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $author);
-                $stmt->execute();
-                $result = $stmt->get_result();
+            // Close statement and connection
+            $stmt->close();
+            $conn->close();
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['title'] . "</td>";
-                        echo "<td>
-                                    <a href='edit_story.php?id=" . $row['id'] . "'>Edit</a> | 
-                                    <a href='delete_story.php?id=" . $row['id'] . "'>Delete</a> |
-                                    <a href='../read/story.writer.php?id=" . $row['id'] . "'>Review</a> |
-                                    <a href='add_chapter.php?id=" . $row['id'] . "'>Add Chapter</a>
-                                  </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='3'>No stories found.</td></tr>";
-                }
-
-                // Close statement and connection
-                $stmt->close();
-                $conn->close();
-                ?>
-            </tbody>
-        </table>
+            ?>
+        </div>
 
         <hr>
 
         <div>
-            <h1 class="mt-5 mb-4">Submit Your Story</h1>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
-                enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="image">Upload Image:</label>
-                    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
-                </div>
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Synopsis:</label>
-                    <textarea class="form-control" id="description" name="description" maxlength="1500" rows="5"
-                        required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="fandom">Fandom:</label>
-                    <input type="text" class="form-control" id="fandom" name="fandom">
-                </div>
-                <div class="form-group">
-                    <label for="language">Language:</label>
-                    <input type="text" class="form-control" id="language" name="language">
-                </div>
-                <div class="form-group">
-                    <label for="status">Status:</label>
-                    <input type="text" class="form-control" id="status" name="status">
-                </div>
-                <div class="form-group">
-                    <label for="series">Series:</label>
-                    <input type="text" class="form-control" id="series" name="series">
-                </div>
-                <div class="form-group">
-                    <label for="characters">Characters:</label>
-                    <input type="text" class="form-control" id="characters" name="characters">
-                </div>
-                <div class="form-group">
-                    <label for="relationship">Relationship:</label>
-                    <input type="text" class="form-control" id="relationship" name="relationship">
-                </div>
-                <div class="form-group">
-                    <label for="new-tag">Register New Tag:</label>
-                    <input type="text" class="form-control" id="new-tag" name="new-tag" placeholder="Enter new tag">
-                    <button type="button" class="btn btn-primary" onclick="registerNewTag()">Register Tag</button>
-                </div>
-                <div id="tag-registration-status"></div>
-                <div class="form-group">
-                    <label for="tags">Tags:</label>
-                    <input type="text" class="form-control" id="tags" name="addtags" readonly>
-                    <div id="tag-options">
-                        <?php include 'tags.php' ?>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h1 class="mt-5 mb-4">Submit Your Story</h1>
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"
+                                enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="image">Upload Image:</label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Title:</label>
+                                    <input type="text" class="form-control" id="title" name="title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Synopsis:</label>
+                                    <textarea class="form-control" id="description" name="description" maxlength="1500"
+                                        rows="5" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fandom">Fandom:</label>
+                                    <input type="text" class="form-control" id="fandom" name="fandom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="language">Language:</label>
+                                    <input type="text" class="form-control" id="language" name="language">
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status:</label>
+                                    <input type="text" class="form-control" id="status" name="status">
+                                </div>
+                                <div class="form-group">
+                                    <label for="series">Series:</label>
+                                    <input type="text" class="form-control" id="series" name="series">
+                                </div>
+                                <div class="form-group">
+                                    <label for="characters">Characters:</label>
+                                    <input type="text" class="form-control" id="characters" name="characters">
+                                </div>
+                                <div class="form-group">
+                                    <label for="relationship">Relationship:</label>
+                                    <input type="text" class="form-control" id="relationship" name="relationship">
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-tag">Register New Tag:</label>
+                                    <input type="text" class="form-control" id="new-tag" name="new-tag"
+                                        placeholder="Enter new tag">
+                                    <button type="button" class="btn btn-primary" onclick="registerNewTag()">Register
+                                        Tag</button>
+                                </div>
+                                <div id="tag-registration-status"></div>
+                                <div class="form-group">
+                                    <label for="tags">Tags:</label>
+                                    <input type="text" class="form-control" id="tags" name="addtags" readonly>
+                                    <div id="tag-options">
+                                        <?php include 'tags.php' ?>
+                                    </div>
+                                    <div id="selected-tags"></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"
+                                    style="margin-bottom:20px;">Submit</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
                     </div>
-                    <div id="selected-tags"></div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="margin-bottom:20px;">Submit</button>
-            </form>
+            </div>
+
+
             <?php
             // Define variables and initialize with empty values
             $title = $description = $fandom = $language = $status = $series = $characters = $relationship = $addtags = "";
@@ -252,9 +289,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             ?>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>

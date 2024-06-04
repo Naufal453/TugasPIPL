@@ -1,97 +1,69 @@
 body {
-    background-color: #E3FEF7;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.navbar-search {
-    margin-right: auto;
-    margin-left: 20px;
-}
-
-.navbar-search input[type="search"] {
-    background-color: #f0f0f0;
-    border: none;
+  background-color: #e3fef7;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .container-fluid {
-    background-color: #135D66;
-    padding-top: 10px;
-    padding-bottom: 17px;
+  padding-top: 10px;
+  padding-bottom: 17px;
 }
 
 .nav-item {
-    margin-left: 10px;
-    margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .nav-link {
-    background-color: transparent;
-    border: none;
-    border-radius: 35px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: transparent;
+  border: none;
+  border-radius: 35px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .nav-link:hover {
-    background-color: #E3FEF7;
-    border: none;
-    border-radius: 35px;
-    box-shadow: 5px;
-}
-
-#search {
-    background-color: #77b0aa;
-    border: none;
-    border-radius: 50%;
-    width: 72px;
-    height: 62px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-#search:hover {
-    background-color: #E3FEF7;
-    border: none;
-    border-radius: 50%;
-    width: 72px;
-    height: 62px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #e3fef7;
+  border: none;
+  border-radius: 35px;
+  box-shadow: 5px;
 }
 
 .tag-btn {
-    margin: 5px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
+  margin: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .tag-btn:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
-.tag-btn, #selected-tags span {
-    margin: 5px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
-    padding: 2px 5px;
+.tag-btn,
+#selected-tags span {
+  margin: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  padding: 2px 5px;
 }
 
 #selected-tags button {
-    margin-left: 5px;
-    color: red;
-    border: none;
-    background: none;
-    cursor: pointer;
+  margin-left: 5px;
+  color: red;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 .text-success {
-    color: green;
+  color: green;
 }
 
 .text-danger {
-    color: red;
+  color: red;
 }
-.form-control{
-    margin-bottom: 10px;
+.form-control {
+  margin-bottom: 10px;
 }
