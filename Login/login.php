@@ -112,6 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['loggedin'] = true;
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['email'] = $user['email'];
 
             if ($role === 'writer') {
                 header("Location: ../writer");

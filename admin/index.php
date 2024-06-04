@@ -62,19 +62,31 @@ $result = $stmt->get_result();
         </div>
     <?php endif; ?>
     <br>
+    <style>
+    </style>
     <div class="row">
         <div class="col-md-6">
             <h3>List Story</h3>
-            <div class="list-item card">
-                <?php
-                foreach ($stories as $story) {
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">' . $story["title"] . ' by ' . $story["author"] . '</h5>';
-                    echo '<div class="media-body">' . substr($story["description"], 0, 100) . "..." . '</div>';
-                    echo '</div>';
-                }
-                ?>
-            </div>
+            <!-- <div class="list-item card"> -->
+            <?php
+            foreach ($stories as $story) {
+                echo '<div class="card mb-3" style="max-width: 540px;">' .
+                    '<div class="row g-0">' .
+                    '<div class="col-md-4">' .
+                    '<img src="../write/' . $story["image_path"] . '"alt="..." style="max-width:180px">' .
+                    '</div>' .
+                    '<div class="col-md-8">' .
+                    '<div class="card-body">' .
+                    '<h5 class="card-title">' . $story["title"] . ' by ' . $story["author"] . '</h5>' .
+                    '<p class="card-text">' . substr($story["description"], 0, 100) . '...' . '</p>' .
+                    '</p>' .
+                    '</div>' .
+                    '</div>' .
+                    '</div>' .
+                    '</div>';
+            }
+            ?>
+            <!-- </div> -->
         </div>
         <div class="col-md-6">
             <h3>List Report</h3>

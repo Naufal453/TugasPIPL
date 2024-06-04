@@ -1,0 +1,93 @@
+
+body {
+    padding-top: 56px;
+    transition: opacity 0.5s ease-in-out;
+    cursor: url('./image/pointer.png');
+}
+.navbar-search {
+    margin-right: auto;
+    margin-left: 20px;
+}
+.navbar-search input[type="search"] {
+    background-color: #f0f0f0;
+    border: none;
+}
+.container-fluid{
+    background-color: #135D66;
+    padding-bottom:17px;
+    padding-top: 10px;
+}
+.nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.nav-link{
+    border:transparent;
+    border-radius:35px;
+    box-shadow:10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.nav-link:hover{
+    background-color:#E3FEF7;
+    border:transparent;
+    border-radius:35px;
+    box-shadow:5px;
+}
+
+
+#search{
+    border:transparent;
+    background-color:#77b0aa;
+    width:72px;height:62px;
+    border-radius:50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#search:hover{
+    border:transparent;
+    background-color:#E3FEF7;
+    width:72px;height:62px;
+    border-radius:50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Add custom styles for cards */
+.story.card {
+    background-color: #77b0aa; /* White background for cards */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    transition: transform 0.3s ease; /* Smooth transition on hover */
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-bottom:100px;
+}
+
+.story.card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+}
+
+.story.card .card-title {
+    color: #333; /* Card title color */
+    font-weight: bold; /* Bold font for title */
+    text-align: center; /* Center-align the text */
+}
+
+.story.card .card-subtitle {
+    color: #666; /* Subtitle color */
+}
+
+.story.card .card-text {
+    color: #444; /* Text color */
+}
+
+/* Add padding and margin to adjust spacing */
+.pt-3 {
+    padding-top: 1rem;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+

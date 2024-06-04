@@ -1,18 +1,20 @@
 <?php
 session_start();
 
-function checkLoggedIn(){
+function checkLoggedIn()
+{
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: ../Login/login.php");
+        header("Location: Login/login.php");
         exit;
     }
 }
 
-function connectDatabase(){
-    $servername = "localhost"; 
-    $username = "root"; 
-    $password = ""; 
-    $database = "alternate_arc"; 
+function connectDatabase()
+{
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "alternate_arc";
 
     $conn = new mysqli($servername, $username, $password, $database);
 
@@ -22,10 +24,12 @@ function connectDatabase(){
     return $conn;
 }
 
-function fetchStories(){
+
+function fetchStories()
+{
     checkLoggedIn();
     $conn = connectDatabase();
-    $sql = "SELECT Addtags, id, title, author, description FROM stories";
+    $sql = "SELECT Addtags, image_path, id, title, author, description FROM stories";
     $result = $conn->query($sql);
 
     $stories = [];
@@ -39,7 +43,8 @@ function fetchStories(){
     return $stories;
 }
 
-function searchStories($search_query) {
+function searchStories($search_query)
+{
     checkLoggedIn();
     $conn = connectDatabase();
 
@@ -61,7 +66,8 @@ function searchStories($search_query) {
     }
 }
 
-function deleteStory($story_id) {
+function deleteStory($story_id)
+{
     checkLoggedIn();
     $conn = connectDatabase();
 
@@ -115,7 +121,8 @@ function deleteStory($story_id) {
     exit;
 }
 
-function reportComment($comment_id) {
+function reportComment($comment_id)
+{
     checkLoggedIn();
     $conn = connectDatabase();
 
