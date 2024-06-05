@@ -121,26 +121,4 @@ function deleteStory($story_id)
     exit;
 }
 
-function reportComment($comment_id)
-{
-    checkLoggedIn();
-    $conn = connectDatabase();
-
-    if (empty($comment_id) || !is_numeric($comment_id)) {
-        die("ID komentar tidak valid.");
-    }
-
-    $sql_report = "INSERT INTO reports (comment_id, report_date) VALUES (?, NOW())";
-    $stmt_report = $conn->prepare($sql_report);
-    $stmt_report->bind_param("i", $comment_id);
-
-    if ($stmt_report->execute()) {
-        echo "Komentar berhasil dilaporkan.";
-    } else {
-        echo "Terjadi kesalahan saat melaporkan komentar.";
-    }
-
-    $stmt_report->close();
-    $conn->close();
-}
 ?>
