@@ -1,6 +1,5 @@
 <?php
-include '../config/config.php';
-checkLoggedIn();
+include_once '../config/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,10 +57,15 @@ checkLoggedIn();
     <div class="fixed-bar">
         <nav class="navbar navbar-light d-flex" style="color:#496989;">
             <a class="navbar-brand text-white p-2 flex-grow-1" href="#">Alternate Arc Archive</a>
-            <form class="form-inline p-2" method="GET" action="../search.php">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button id="search" type="submit"> cari</button>
+            <form class="form-inline p-2" method="GET" action="search.php">
+                <input name="query"
+                    style="border-radius:15px;box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                    class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" style="" id="search" type="submit">
+                    <img style="width:36px;height:36px;" src="../image/search.png" alt="">
+                </button>
             </form>
+
 
             <div class="profile-dropdown p-2">
                 <img src="../image/user_1077012.png" style="max-width:32px;" class="rounded-circle" alt="User Avatar">

@@ -48,7 +48,7 @@ function searchStories($search_query)
     checkLoggedIn();
     $conn = connectDatabase();
 
-    $sql = "SELECT id, title, author, description FROM stories WHERE title LIKE '%$search_query%' OR author LIKE '%$search_query%'";
+    $sql = "SELECT image_path, Addtags, id, title, author, description FROM stories WHERE title LIKE '%$search_query%' OR author LIKE '%$search_query%'";
     $result = $conn->query($sql);
 
     if ($result === false) {

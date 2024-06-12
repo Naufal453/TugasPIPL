@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt_like->execute();
             $stmt_like->close();
         }
-        
+
         $stmt_check_like->close();
     } else {
         // Ambil data yang dikirimkan melalui form
@@ -76,6 +76,7 @@ $result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,6 +92,7 @@ $result = $stmt->get_result();
             min-height: 100vh;
             margin: 0;
         }
+
         .container {
             background-color: white;
             border-radius: 10px;
@@ -101,24 +103,29 @@ $result = $stmt->get_result();
             margin: 20px 0;
             box-sizing: border-box;
         }
+
         .container h2 {
             color: #333;
             margin-bottom: 20px;
             text-align: center;
         }
+
         .container p {
             color: #555;
             line-height: 1.6;
         }
+
         .like-button {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
         }
+
         .like-button form {
             display: inline;
         }
+
         .like-button button {
             background-color: #007BFF;
             color: white;
@@ -128,15 +135,19 @@ $result = $stmt->get_result();
             cursor: pointer;
             font-size: 16px;
         }
+
         .like-button button:hover {
             background-color: #0069d9;
         }
+
         .like-button span {
             color: #555;
             margin-left: 10px;
             font-size: 16px;
         }
-        .comment-form, .comments {
+
+        .comment-form,
+        .comments {
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -146,11 +157,14 @@ $result = $stmt->get_result();
             margin: 20px 0;
             box-sizing: border-box;
         }
-        .comment-form h2, .comments h2 {
+
+        .comment-form h2,
+        .comments h2 {
             color: #333;
             margin-bottom: 20px;
             text-align: center;
         }
+
         .comment-form textarea {
             width: 100%;
             padding: 10px;
@@ -160,6 +174,7 @@ $result = $stmt->get_result();
             margin-bottom: 10px;
             resize: vertical;
         }
+
         .comment-form button {
             background-color: #4CAF50;
             color: white;
@@ -171,9 +186,11 @@ $result = $stmt->get_result();
             display: block;
             margin: 0 auto;
         }
+
         .comment-form button:hover {
             background-color: #45a049;
         }
+
         .comment {
             background-color: #f9f9f9;
             padding: 15px;
@@ -181,14 +198,17 @@ $result = $stmt->get_result();
             border-radius: 5px;
             margin-bottom: 10px;
         }
+
         .comment strong {
             color: #333;
         }
+
         .comment small {
             color: #888;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <?php
@@ -225,7 +245,8 @@ $result = $stmt->get_result();
         <h2>Tambahkan Komentar</h2>
         <form method="POST" action="">
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-            <input type="hidden" name="chapter_id" value="<?php echo $_GET['chapter_id']; ?>"> <!-- Menambahkan input tersembunyi dengan id bab -->
+            <input type="hidden" name="chapter_id" value="<?php echo $_GET['chapter_id']; ?>">
+            <!-- Menambahkan input tersembunyi dengan id bab -->
             <textarea name="comment_text" placeholder="Masukkan komentar Anda" required></textarea>
             <button type="submit">Kirim</button>
         </form>
@@ -274,7 +295,8 @@ $result = $stmt->get_result();
     </div>
 
     <!-- Success Notification Modal -->
-    <div id="successModal" class="modal" style="<?php echo isset($_GET['report_success']) ? 'display:block;' : 'display:none;'; ?>">
+    <div id="successModal" class="modal"
+        style="<?php echo isset($_GET['report_success']) ? 'display:block;' : 'display:none;'; ?>">
         <div class="modal-content">
             <span class="close" onclick="closeSuccessModal()">&times;</span>
             <p>Report submitted successfully!</p>
@@ -283,23 +305,32 @@ $result = $stmt->get_result();
 
     <style>
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
         }
 
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
+            margin: 15% auto;
+            /* 15% from the top and centered */
             padding: 20px;
             border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
+            width: 80%;
+            /* Could be more or less, depending on screen size */
         }
 
         .close {
@@ -331,12 +362,12 @@ $result = $stmt->get_result();
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+        span.onclick = function () {
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
@@ -354,7 +385,7 @@ $result = $stmt->get_result();
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == successModal) {
                 successModal.style.display = "none";
             }
@@ -363,4 +394,5 @@ $result = $stmt->get_result();
 
     <?php $conn->close(); ?>
 </body>
+
 </html>

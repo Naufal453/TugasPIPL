@@ -59,7 +59,12 @@ checkLoggedIn();
         <nav class="navbar navbar-light d-flex" style="color:#496989;">
             <a class="navbar-brand text-white p-2 flex-grow-1" href="#">Alternate Arc Archive</a>
             <form class="form-inline p-2">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <input name="query"
+                    style="border-radius:15px;box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                    class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" style="" id="search" type="submit">
+                    <img style="width:36px;height:36px;" src="../image/search.png" alt="">
+                </button>
             </form>
 
             <div class="profile-dropdown p-2">
@@ -71,7 +76,7 @@ checkLoggedIn();
                     echo '<h5 class="mb-0"><strong>' . $_SESSION['username'] . '</strong></h5>';
                     echo '<p class="mb-0"><strong>' . $_SESSION['email'] . '</strong></p>';
                     // echo '<p class="mb-0">' . $_SESSION['role'] . '</p>';
-                    echo '<a href="../profile/profile.php">' . 'Profile Setting' . '</a><br>';
+                    echo '<a href="../profile/profilereader.php">' . 'Profile Setting' . '</a><br>';
                     echo '<a href="../logout.php">' . 'Logout' . '</a><br>';
 
 

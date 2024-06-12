@@ -36,10 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="./style/profileset.css">
 </head>
 <header>
-    <?php include 'navbar.php' ?>
+    <?php include 'navbarreader.php' ?>
 </header>
 
-<body style="margin-top:300px;">
+<body style="margin-top:100px;">
 
     <h2 style="margin-top:100px;margin-left: 50px;margin-right: 50px;">Profile Settings</h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
